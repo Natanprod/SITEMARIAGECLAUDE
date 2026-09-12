@@ -1,26 +1,248 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ==========================================================================
+   MAISON — Système de design
+   Base sobre (encre / papier / greige) + accents champêtres employés
+   uniquement en filets, capitales fines, tirages duotone et états de survol.
+   ========================================================================== */
+
+@theme {
+  /* --- Neutres : la structure du site --- */
+  --color-noir: #0a0a09;
+  --color-ink: #16130f;
+  --color-ardoise: #2a2621;
+  --color-greige: #736a5c;
+  --color-lin: #ded7c9;
+  --color-paper: #f2eee5;
+  --color-albatre: #faf8f3;
+
+  /* --- Accents champêtres : jamais en aplat, toujours en trace ---
+     Les quatre teintes sont posées au seuil AA sur fond papier : elles
+     servent aussi de couleur de texte (citation, mention), pas seulement
+     de filet. --- */
+  --color-sauge: #8c9c7d;
+  --color-tournesol: #cfa02a;
+  --color-lilas: #9a90b4;
+  --color-terre: #9f553c;
+
+  /* --- Typographie --- */
+  --font-display: var(--font-alfa), "Alfa Slab One", Georgia, serif;
+  --font-sans: "Glacial Indifference", var(--font-glacial), "Futura",
+    "Avenir Next", system-ui, sans-serif;
+
+  /* --- Échelle éditoriale (fluide) --- */
+  --text-micro: 0.6875rem;
+  --text-label: 0.75rem;
+  --text-body: clamp(0.95rem, 0.9rem + 0.25vw, 1.0625rem);
+  --text-lead: clamp(1.125rem, 1rem + 0.7vw, 1.5rem);
+  --text-h3: clamp(1.375rem, 1.1rem + 1.1vw, 2rem);
+  --text-h2: clamp(1.875rem, 1.3rem + 2.4vw, 3.5rem);
+  --text-h1: clamp(2.5rem, 1.4rem + 4.6vw, 6rem);
+  --text-colossal: clamp(3.5rem, 1rem + 11vw, 13rem);
+
+  /* --- Rythme vertical --- */
+  --spacing-gutter: clamp(1.25rem, 4vw, 4rem);
+  --spacing-section: clamp(5rem, 12vw, 12rem);
+
+  /* --- Mouvement : lent, tenu, jamais rebondissant --- */
+  --ease-maison: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-rideau: cubic-bezier(0.76, 0, 0.24, 1);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: var(--text-body);
+    line-height: 1.62;
+    font-weight: 400;
+    overflow-x: clip;
+  }
+
+  ::selection {
+    background-color: var(--color-ink);
+    color: var(--color-paper);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-weight: 400;
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  /* Focus : discret mais sans compromis d'accessibilité */
+  :focus-visible {
+    outline: 1px solid currentColor;
+    outline-offset: 4px;
+  }
+
+  ::placeholder {
+    color: var(--color-greige);
+    opacity: 1;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ==========================================================================
+   Utilitaires de maison
+   ========================================================================== */
+
+/* Capitales fines : l'étiquette éditoriale du site */
+@utility label {
+  font-size: var(--text-label);
+  text-transform: uppercase;
+  letter-spacing: 0.34em;
+  line-height: 1;
+  font-weight: 400;
+}
+
+@utility label-micro {
+  font-size: var(--text-micro);
+  text-transform: uppercase;
+  letter-spacing: 0.42em;
+  line-height: 1;
+}
+
+/* Le cadre du site : gouttière constante, jamais de bord à bord accidentel */
+@utility frame {
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: var(--spacing-gutter);
+  max-width: 96rem;
+}
+
+@utility frame-narrow {
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: var(--spacing-gutter);
+  max-width: 58rem;
+}
+
+/* Filet horizontal — la ponctuation du site */
+@utility rule {
+  height: 1px;
+  width: 100%;
+  background-color: currentColor;
+  opacity: 0.16;
+}
+
+/* Lien éditorial : le trait se dessine, il n'apparaît pas */
+@utility link-draw {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 0.28em;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset-inline: 0;
+    bottom: 0;
+    height: 1px;
+    background-color: currentColor;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.7s var(--ease-maison);
+  }
+
+  &:hover::after,
+  &:focus-visible::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+}
+
+/* Lien dont le trait est présent puis se retire */
+@utility link-erase {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 0.28em;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset-inline: 0;
+    bottom: 0;
+    height: 1px;
+    background-color: currentColor;
+    opacity: 0.4;
+    transform-origin: left;
+    transition:
+      transform 0.7s var(--ease-maison),
+      opacity 0.7s var(--ease-maison);
+  }
+
+  &:hover::after {
+    opacity: 1;
+  }
+}
+
+/* Grain argentique : posé sur toute la page, quasi imperceptible */
+@utility grain {
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.32;
+    mix-blend-mode: multiply;
+    background-image: var(--grain-texture);
+    background-size: 180px 180px;
+  }
+}
+
+/* Césure typographique verticale pour les grands chiffres de section */
+@utility numeral {
+  font-family: var(--font-display);
+  font-feature-settings: "tnum";
+  line-height: 0.8;
+}
+
+:root {
+  /* Bruit gaussien encodé une fois, réutilisé partout (aucune requête réseau) */
+  --grain-texture: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.86' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='0.44'/%3E%3C/svg%3E");
+}
+
+/* Le mouvement est un parti pris, pas une obligation */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
