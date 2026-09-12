@@ -17,11 +17,10 @@ export const maison = {
   instagram: "@natan.mariage",
   instagramUrl: "https://www.instagram.com/natan.mariage/",
   /**
-   * Le domaine définitif n'est pas encore arrêté. Il vit ici et nulle part
-   * ailleurs : métadonnées, sitemap et robots.txt le lisent tous à cette
-   * source, une seule ligne à changer le jour du dépôt du nom.
+   * Le domaine en ligne. Il vit ici et nulle part ailleurs : métadonnées,
+   * canonique, sitemap et robots.txt le lisent tous à cette source.
    */
-  url: "https://natan-mariage.fr",
+  url: "https://natanmariage.com",
 } as const;
 
 /** Identité légale — mentions obligatoires, employée par /mentions-legales. */
