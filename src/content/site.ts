@@ -5,17 +5,36 @@
  */
 
 export const maison = {
-  nom: "Nathan Mathieu",
-  nomCourt: "N.M.",
+  nom: "Natan",
+  nomCourt: "N.",
   discipline: "Photographie & cinéma de mariage",
   signature: "Maison d'image — depuis 2015",
   baseline: "Nous ne photographions pas un mariage. Nous en écrivons la mémoire.",
-  ville: "Paris",
-  rayon: "Paris · France · Europe · Ailleurs sur demande",
-  email: "contact@nathanmathieu.com",
-  telephone: "+33 6 00 00 00 00",
-  instagram: "@nathanmathieu",
-  instagramUrl: "https://instagram.com/",
+  ville: "Marseille",
+  rayon: "France",
+  email: "contactnathanmathieu@gmail.com",
+  telephone: "+33 6 04 48 08 37",
+  instagram: "@natan.mariage",
+  instagramUrl: "https://www.instagram.com/natan.mariage/",
+  /**
+   * Le domaine définitif n'est pas encore arrêté. Il vit ici et nulle part
+   * ailleurs : métadonnées, sitemap et robots.txt le lisent tous à cette
+   * source, une seule ligne à changer le jour du dépôt du nom.
+   */
+  url: "https://natan-mariage.fr",
+} as const;
+
+/** Identité légale — mentions obligatoires, employée par /mentions-legales. */
+export const legal = {
+  formeJuridique: "Micro-entreprise",
+  directeurPublication: "Mathieu Nathan",
+  adresse: "59 chemin du Vallon de Toulouse, 13010 Marseille",
+  siret: "910 599 695 00020",
+  /** Micro-entreprise sous les seuils : pas de numéro de TVA intracommunautaire. */
+  tva: "TVA non applicable, article 293 B du Code général des impôts",
+  hebergeur: "Hostinger International Ltd",
+  /** À compléter depuis les mentions légales de l'hébergeur. */
+  hebergeurAdresse: "[adresse et téléphone à reprendre sur hostinger.fr]",
 } as const;
 
 export type NavItem = {

@@ -1,8 +1,9 @@
 import type { MetadataRoute } from "next";
+import { maison } from "@/content/site";
 
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: { userAgent: "*", allow: "/", disallow: "/mentions-legales" },
-    sitemap: "https://nathanmathieu.com/sitemap.xml",
+    sitemap: `${maison.url}/sitemap.xml`,
   };
 }

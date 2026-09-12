@@ -71,7 +71,7 @@ export default function Contact() {
                 <div>
                   <dt className="label-micro text-greige">Atelier</dt>
                   <dd className="mt-3 text-ardoise">
-                    {maison.ville}, France
+                    {maison.ville}
                     <br />
                     Sur rendez-vous
                   </dd>

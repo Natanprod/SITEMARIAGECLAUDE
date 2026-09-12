@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Filet } from "@/components/editorial";
-import { maison } from "@/content/site";
+import { legal, maison } from "@/content/site";
 
 export const metadata: Metadata = {
   title: "Mentions légales",
@@ -9,29 +9,30 @@ export const metadata: Metadata = {
 };
 
 /**
- * Page légale — à compléter avec les informations réelles de la structure
- * (SIRET, forme juridique, hébergeur). Les crochets signalent ce qui reste
- * à renseigner.
+ * Page légale.
+ *
+ * Les informations viennent de `legal` et `maison` dans src/content/site.ts.
+ * Ce qui reste entre crochets est encore à renseigner — aujourd'hui, la
+ * seule chose manquante est l'adresse postale de l'hébergeur, à recopier
+ * depuis ses propres mentions légales.
  */
 const sections = [
   {
     titre: "Éditeur",
     contenu: [
       `${maison.nom} — ${maison.discipline}`,
-      "[Forme juridique] au capital de [montant] €",
-      "[Adresse complète], France",
-      "SIRET [numéro] — TVA [numéro]",
+      legal.formeJuridique,
+      legal.adresse,
+      `SIRET ${legal.siret}`,
+      legal.tva,
       `Courriel : ${maison.email}`,
-      "Directeur de la publication : [nom]",
+      `Téléphone : ${maison.telephone}`,
+      `Directeur de la publication : ${legal.directeurPublication}`,
     ],
   },
   {
     titre: "Hébergement",
-    contenu: [
-      "[Nom de l'hébergeur]",
-      "[Adresse de l'hébergeur]",
-      "[Téléphone de l'hébergeur]",
-    ],
+    contenu: [legal.hebergeur, legal.hebergeurAdresse],
   },
   {
     titre: "Propriété intellectuelle",
@@ -44,9 +45,7 @@ const sections = [
     titre: "Données personnelles",
     contenu: [
       "Le formulaire de contact de ce site n'enregistre aucune donnée : il compose un courriel dans votre propre messagerie. Aucune information n'est transmise à un tiers, aucun traceur publicitaire n'est déposé.",
-      "Les échanges par courriel sont conservés le temps nécessaire au traitement de la demande, puis à des fins d'archivage contractuel. Vous disposez d'un droit d'accès, de rectification et d'effacement en écrivant à " +
-        maison.email +
-        ".",
+      `Les échanges par courriel sont conservés le temps nécessaire au traitement de la demande, puis à des fins d'archivage contractuel. Vous disposez d'un droit d'accès, de rectification et d'effacement en écrivant à ${maison.email}.`,
     ],
   },
   {

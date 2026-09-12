@@ -32,29 +32,28 @@ const glacial = Jost({
   weight: ["300", "400", "500"],
 });
 
-const url = "https://nathanmathieu.com";
-
 export const metadata: Metadata = {
-  metadataBase: new URL(url),
+  metadataBase: new URL(maison.url),
   title: {
     default: `${maison.nom} — ${maison.discipline}`,
     template: `%s — ${maison.nom}`,
   },
   description:
-    "Maison d'image dédiée au mariage : photographie éditoriale et films de célébration, conçus comme des œuvres. Paris, France et à l'étranger. Douze mariages par an.",
+    "Maison d'image dédiée au mariage : photographie éditoriale et films de célébration, conçus comme des œuvres. Marseille, Provence et toute la France. Douze mariages par an.",
   keywords: [
     "photographe de mariage haut de gamme",
     "vidéaste de mariage",
     "film de mariage",
     "photographie éditoriale",
     "mariage de luxe",
-    "Paris",
+    "Marseille",
+    "Provence",
   ],
   authors: [{ name: maison.nom }],
   openGraph: {
     type: "website",
     locale: "fr_FR",
-    url,
+    url: maison.url,
     siteName: maison.nom,
     title: `${maison.nom} — ${maison.discipline}`,
     description: maison.baseline,

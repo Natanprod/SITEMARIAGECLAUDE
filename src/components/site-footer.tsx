@@ -73,12 +73,10 @@ export function SiteFooter() {
 
           <div>
             <p className="label-micro text-paper/55">Atelier</p>
-            <p className="mt-6 text-paper/80">
-              {maison.ville}
-              <br />
-              France
-            </p>
-            <p className="mt-4 text-paper/60">{maison.rayon}</p>
+            <p className="mt-6 text-paper/80">{maison.ville}</p>
+            {/* Le rayon est préfixé : sans cela, une maison dont le rayon
+                vaut « France » affichait deux fois la même ligne. */}
+            <p className="mt-4 text-paper/60">Interventions — {maison.rayon}</p>
           </div>
 
           <div>

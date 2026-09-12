@@ -1,7 +1,8 @@
 import type { MetadataRoute } from "next";
+import { maison } from "@/content/site";
 import { stories } from "@/content/stories";
 
-const BASE = "https://nathanmathieu.com";
+const BASE = maison.url;
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const pages = ["", "/maison", "/histoires", "/films", "/experience", "/contact"];
