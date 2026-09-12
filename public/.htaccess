@@ -46,9 +46,17 @@ ErrorDocument 404 /404.html
 </IfModule>
 
 # --- 5. Forcer HTTPS -----------------------------------------------------
-# À n'activer QU'APRÈS avoir installé le certificat SSL dans Hostinger.
-# Activé trop tôt, le site devient inaccessible. Pour l'activer : retirer
-# le « # » devant les quatre lignes suivantes.
+# NE PAS ACTIVER CE BLOC CHEZ HOSTINGER.
+#
+# hPanel possède son propre interrupteur : Sécurité → SSL → bouton à trois
+# points en face du domaine → « Forcer HTTPS ». C'est celui-là qu'il faut
+# employer. Il est plus sûr, il se désactive d'un clic, et Hostinger peut
+# écrire sa propre règle dans ce fichier — deux règles concurrentes sont
+# la cause classique de la boucle de redirection.
+#
+# Le bloc ci-dessous n'est qu'un secours, pour un hébergeur qui n'offrirait
+# pas l'interrupteur. Dans ce cas seulement, et seulement APRÈS que le
+# certificat fonctionne, retirer les « # » des quatre lignes.
 #
 # <IfModule mod_rewrite.c>
 #   RewriteEngine On
