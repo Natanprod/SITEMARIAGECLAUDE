@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Masthead } from "@/components/masthead";
-import { Plate } from "@/components/plate";
+import { Plan } from "@/components/plan";
+import { Respiration } from "@/components/respiration";
 import { Reveal, RevealGroup, RevealItem } from "@/components/reveal";
-import { Chapeau, Etiquette, Filet } from "@/components/editorial";
+import { Etiquette, Filet } from "@/components/editorial";
 import { TitreAnime } from "@/components/titre-anime";
 import { collections, deroule, questions } from "@/content/collections";
 
@@ -16,26 +16,27 @@ export const metadata: Metadata = {
 export default function Experience() {
   return (
     <>
-      <Masthead
-        hauteur="court"
-        etiquette="04 — L'Expérience"
-        accent="tournesol"
-        lignes={["Trois collections,", "un seul soin"]}
-        chapeau={
-          <p className="font-light">
-            Les montants ci-dessous annoncent un niveau d&apos;exigence. Ils ne
-            tiennent pas lieu de devis : chaque célébration est chiffrée après
-            la rencontre.
-          </p>
-        }
+      <Plan
+        hauteur="grand"
+        priority
         image={{
           src: "/plates/experience-large.jpg",
           alt: "Enfilade claire, lumière du matin",
         }}
+        titre="Trois collections, un seul soin"
+        hautGauche={
+          <span className="label text-paper/60">04 — L&apos;Expérience</span>
+        }
+        basGauche={
+          <p className="max-w-lg text-paper/75">
+            Les montants annoncent un niveau d&apos;exigence. Ils ne tiennent pas
+            lieu de devis : chaque célébration est chiffrée après la rencontre.
+          </p>
+        }
       />
 
       {/* ——— Collections ——————————————————————————————— */}
-      <section className="frame py-[var(--spacing-section)]">
+      <Respiration ton="albatre">
         <div className="grid gap-x-10 gap-y-20 lg:grid-cols-3">
           {collections.map((c, i) => (
             <Reveal key={c.index} delay={i * 0.06} large>
@@ -90,15 +91,14 @@ export default function Experience() {
             marge. Règlement en trois échéances, sans frais.
           </p>
         </Reveal>
-      </section>
+      </Respiration>
 
       {/* ——— Déroulé ——————————————————————————————————— */}
-      <section className="grain relative bg-ink py-[var(--spacing-section)] text-paper">
-        <div className="frame relative z-2">
+      <Respiration ton="encre">
           <Reveal>
-            <Etiquette accent="tournesol" className="text-paper/60">Le déroulé</Etiquette>
+            <Etiquette accent="tournesol" className="text-brume">Le déroulé</Etiquette>
           </Reveal>
-          <TitreAnime className="mt-10 max-w-2xl">
+          <TitreAnime geste="dilate" className="mt-10 max-w-2xl">
             De la première lettre à l&apos;objet posé sur votre table.
           </TitreAnime>
 
@@ -107,7 +107,7 @@ export default function Experience() {
           <RevealGroup className="grid gap-x-10 gap-y-14 pt-16 md:grid-cols-2 lg:grid-cols-3" pas={0.08}>
             {deroule.map((e) => (
               <RevealItem key={e.index}>
-                <p className="numeral text-[length:var(--text-h3)] text-paper/50">
+                <p className="numeral text-[length:var(--text-h3)] text-brume">
                   {e.index}
                 </p>
                 <h3 className="mt-6 text-[length:var(--text-h3)] leading-none">
@@ -117,37 +117,29 @@ export default function Experience() {
               </RevealItem>
             ))}
           </RevealGroup>
-        </div>
-      </section>
+      </Respiration>
 
-      {/* ——— Une image, une respiration ————————————————— */}
-      <section className="frame py-[var(--spacing-section)]">
-        <div className="grid gap-14 lg:grid-cols-12">
-          <div className="lg:col-span-4">
-            <Plate
-              plate={{
-                src: "/plates/experience-detail.jpg",
-                alt: "Détail de tirage sur papier coton",
-                ratio: "portrait",
-              }}
-              sizes="(max-width: 1024px) 100vw, 32vw"
-            />
-          </div>
-          <div className="lg:col-span-7 lg:col-start-6 lg:self-center">
-            <Reveal>
-              <Chapeau className="text-ardoise">
-                Chaque collection comprend la conservation des fichiers sources
-                pendant dix ans, la cession des droits d&apos;usage privé, et une
-                galerie privée qui ne ferme jamais.
-              </Chapeau>
-            </Reveal>
-          </div>
-        </div>
-      </section>
+      {/* ——— Plan : le détail ————————————————————————— */}
+      <Plan
+        hauteur="moyen"
+        voile={0.75}
+        image={{
+          src: "/plates/experience-detail.jpg",
+          alt: "Détail de tirage sur papier coton",
+        }}
+        hautGauche={<span className="label-micro text-paper/60">Ce qui reste</span>}
+        basGauche={
+          <p className="max-w-xl text-paper/80">
+            Chaque collection comprend la conservation des fichiers sources
+            pendant dix ans, la cession des droits d&apos;usage privé, et une
+            galerie privée qui ne ferme jamais.
+          </p>
+        }
+      />
 
       {/* ——— Questions ————————————————————————————————— */}
-      <section className="bg-albatre py-[var(--spacing-section)]">
-        <div className="frame grid gap-14 lg:grid-cols-12">
+      <Respiration>
+        <div className="grid gap-14 lg:grid-cols-12">
           <div className="lg:col-span-4">
             <Reveal>
               <Etiquette accent="tournesol" className="text-greige">Questions</Etiquette>
@@ -183,7 +175,7 @@ export default function Experience() {
             </Reveal>
           </div>
         </div>
-      </section>
+      </Respiration>
     </>
   );
 }

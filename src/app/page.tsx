@@ -1,12 +1,12 @@
 import Link from "next/link";
-import { Masthead } from "@/components/masthead";
-import { Plate } from "@/components/plate";
-import { StoryCard } from "@/components/story-card";
+import { Plan } from "@/components/plan";
+import { Respiration } from "@/components/respiration";
 import { Reveal, RevealGroup, RevealItem } from "@/components/reveal";
-import { Chapeau, Etiquette, Filet } from "@/components/editorial";
 import { TitreAnime } from "@/components/titre-anime";
+import { Etiquette, Filet } from "@/components/editorial";
 import { maison, reperes, temoignages } from "@/content/site";
 import { stories } from "@/content/stories";
+import { films } from "@/content/films";
 
 const selection = stories.slice(0, 3);
 
@@ -34,35 +34,61 @@ const savoirFaire = [
 export default function Accueil() {
   return (
     <>
-      <Masthead
-        etiquette={maison.signature}
-        accent="terre"
-        lignes={["Photographier", "un mariage", "comme une œuvre"]}
-        chapeau={
-          <p className="text-[length:var(--text-lead)] leading-[1.45] font-light">
-            Maison d&apos;image fondée sur une conviction simple : une
-            célébration mérite la même exigence qu&apos;une campagne, un
-            éditorial, un film.
-          </p>
-        }
-        meta={[maison.discipline, maison.rayon, "Douze mariages par an"]}
+      {/* ——— Plan d'ouverture ————————————————————————— */}
+      <Plan
+        hauteur="plein"
+        priority
         image={{
           src: "/plates/ouverture.jpg",
           alt: "Lumière de fin de journée sur une façade de pierre",
         }}
+        titre="Photographier un mariage comme une œuvre"
+        hautGauche={<span className="label text-paper/60">{maison.signature}</span>}
+        basGauche={
+          <div className="flex flex-wrap gap-x-10 gap-y-2">
+            <span className="label-micro text-paper/60">{maison.discipline}</span>
+            <span className="label-micro text-paper/60">{maison.rayon}</span>
+            <span className="label-micro text-paper/60">Douze mariages par an</span>
+          </div>
+        }
+        basDroite={
+          <span className="label-micro text-terre-clair">Défiler</span>
+        }
       />
 
-      {/* ——— Manifeste ————————————————————————————————— */}
-      <section className="frame py-[var(--spacing-section)]">
-        <div className="grid gap-14 lg:grid-cols-12 lg:gap-16">
-          <div className="lg:col-span-7">
+      {/* ——— Première histoire ————————————————————————— */}
+      <Plan
+        href={`/histoires/${selection[0].slug}`}
+        image={selection[0].couverture}
+        titre={selection[0].titre}
+        hautGauche={
+          <span className="label-micro text-paper/60">
+            Nº 01 — {selection[0].region}
+          </span>
+        }
+        basGauche={
+          <span className="label-micro text-paper/60">
+            {selection[0].couple} · {selection[0].saison} {selection[0].annee}
+          </span>
+        }
+        basDroite={
+          <span className="label-micro text-paper/60">Voir l&apos;histoire</span>
+        }
+      />
+
+      {/* ——— Respiration : le propos ————————————————————— */}
+      <Respiration>
+        <div className="grid gap-14 lg:grid-cols-12">
+          <div className="lg:col-span-4">
             <Reveal>
-              <Etiquette index="01" accent="sauge" className="text-greige">
+              <Etiquette index="01" accent="terre" className="text-greige">
                 Le propos
               </Etiquette>
             </Reveal>
+          </div>
 
-            <TitreAnime className="mt-10 max-w-2xl">
+          <div className="lg:col-span-7 lg:col-start-6">
+            <TitreAnime className="max-w-2xl">
               La plupart des mariages sont photographiés. Très peu sont
               regardés.
             </TitreAnime>
@@ -88,145 +114,63 @@ export default function Accueil() {
             </RevealGroup>
 
             <Reveal delay={0.1}>
-              <p className="numeral mt-16 max-w-md text-[length:var(--text-lead)] leading-[1.35] text-terre">
+              <p className="numeral mt-14 max-w-md text-[length:var(--text-lead)] leading-[1.35] text-terre">
                 {maison.baseline}
               </p>
             </Reveal>
           </div>
-
-          <div className="lg:col-span-5 lg:pt-24">
-            <Plate
-              plate={{
-                src: "/plates/accueil-manifeste.jpg",
-                alt: "Intérieur clair, lumière de fin de matinée sur un mur de pierre",
-                ratio: "portrait",
-              }}
-              legende="Domaine de Fontenille — Luberon, juin"
-              sizes="(max-width: 1024px) 100vw, 40vw"
-            />
-          </div>
         </div>
-      </section>
+      </Respiration>
 
-      {/* ——— Repères ——————————————————————————————————— */}
-      <section className="frame pb-[var(--spacing-section)]">
-        <Filet className="text-ink" />
-        <RevealGroup
-          as="dl"
-          className="grid grid-cols-2 gap-y-12 pt-14 md:grid-cols-4"
-          pas={0.07}
-        >
-          {reperes.map((r) => (
-            <RevealItem key={r.legende}>
-              <dt className="numeral text-[length:var(--text-h2)] leading-none">
-                {r.valeur}
-                <span className="text-[0.38em] align-super ml-1 text-greige">
-                  {r.suffixe}
-                </span>
-              </dt>
-              <dd className="label-micro mt-5 max-w-[14ch] text-greige">
-                {r.legende}
-              </dd>
-            </RevealItem>
-          ))}
-        </RevealGroup>
-      </section>
-
-      {/* ——— Sélection d'histoires ————————————————————— */}
-      <section className="bg-albatre py-[var(--spacing-section)]">
-        <div className="frame">
-          <div className="flex flex-wrap items-end justify-between gap-8">
-            <div>
-              <Reveal>
-                <Etiquette index="02" accent="terre" className="text-greige">
-                  Histoires
-                </Etiquette>
-              </Reveal>
-              <TitreAnime className="mt-10 max-w-xl">
-                Six célébrations, choisies pour ce qu&apos;elles ont exigé.
-              </TitreAnime>
-            </div>
-            <Reveal delay={0.1}>
-              <Link href="/histoires" className="label link-draw">
-                Toutes les histoires
-              </Link>
-            </Reveal>
-          </div>
-
-          {/* Grille éditoriale : jamais trois colonnes égales. */}
-          <div className="mt-20 grid gap-x-8 gap-y-20 md:grid-cols-12">
-            <Reveal className="md:col-span-7" large>
-              <StoryCard
-                story={selection[0]}
-                ratio="paysage"
-                numero="01"
-                sizes="(max-width: 768px) 100vw, 58vw"
-              />
-            </Reveal>
-            <Reveal className="md:col-span-5 md:pt-28" large>
-              <StoryCard
-                story={selection[1]}
-                ratio="portrait"
-                numero="02"
-                sizes="(max-width: 768px) 100vw, 40vw"
-              />
-            </Reveal>
-            <Reveal className="md:col-span-8 md:col-start-4" large>
-              <StoryCard
-                story={selection[2]}
-                ratio="cinema"
-                numero="03"
-                sizes="(max-width: 768px) 100vw, 66vw"
-              />
-            </Reveal>
-          </div>
-        </div>
-      </section>
+      {/* ——— Deuxième histoire ————————————————————————— */}
+      <Plan
+        href={`/histoires/${selection[1].slug}`}
+        image={selection[1].couverture}
+        titre={selection[1].titre}
+        hautGauche={
+          <span className="label-micro text-paper/60">
+            Nº 02 — {selection[1].region}
+          </span>
+        }
+        basGauche={
+          <span className="label-micro text-paper/60">
+            {selection[1].couple} · {selection[1].saison} {selection[1].annee}
+          </span>
+        }
+        basDroite={
+          <span className="label-micro text-paper/60">Voir l&apos;histoire</span>
+        }
+      />
 
       {/* ——— Le film ——————————————————————————————————— */}
-      <section className="grain relative bg-ink py-[var(--spacing-section)] text-paper">
-        <div className="frame relative z-2">
-          <div className="grid gap-14 lg:grid-cols-12">
-            <div className="lg:col-span-4">
-              <Reveal>
-                <Etiquette index="03" accent="lilas" className="text-paper/60">
-                  Le cinéma
-                </Etiquette>
-              </Reveal>
-              <TitreAnime className="mt-10">
-                Un film, pas une vidéo de mariage.
-              </TitreAnime>
-              <Reveal delay={0.08}>
-                <p className="mt-10 text-paper/70">
-                  Nous tournons comme on tourne une fiction courte : repérages,
-                  découpage, son direct, étalonnage sur mesure. Le montage suit
-                  la lumière du jour plutôt que le déroulé du programme.
-                </p>
-                <Link href="/films" className="label link-draw mt-12 inline-block">
-                  Voir les films
-                </Link>
-              </Reveal>
-            </div>
+      <Plan
+        href="/films"
+        hauteur="grand"
+        image={{ src: films[0].poster, alt: films[0].posterAlt }}
+        titre="Un film, pas une vidéo de mariage"
+        hautGauche={
+          <span className="label-micro text-paper/60">Le cinéma</span>
+        }
+        basGauche={
+          <p className="max-w-md text-paper/75">
+            Repérages, découpage, son direct, étalonnage sur mesure. Le montage
+            suit la lumière du jour plutôt que le déroulé du programme.
+          </p>
+        }
+        basDroite={
+          <>
+            <span className="numeral text-[length:var(--text-h3)]">
+              {films[0].duree}
+            </span>
+            <span className="label-micro text-paper/60">{films[0].format}</span>
+          </>
+        }
+      />
 
-            <div className="lg:col-span-8">
-              <Plate
-                plate={{
-                  src: "/plates/accueil-film.jpg",
-                  alt: "Image extraite d'un film de mariage, crépuscule sur une terrasse",
-                  ratio: "cinema",
-                }}
-                legende="Extrait — « La lumière de juin », 7'12, 2.39:1"
-                sizes="(max-width: 1024px) 100vw, 62vw"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ——— Savoir-faire ————————————————————————————— */}
-      <section className="frame py-[var(--spacing-section)]">
+      {/* ——— Respiration : savoir-faire et repères ——————— */}
+      <Respiration ton="albatre">
         <Reveal>
-          <Etiquette index="04" accent="tournesol" className="text-greige">
+          <Etiquette index="02" accent="sauge" className="text-greige">
             Savoir-faire
           </Etiquette>
         </Reveal>
@@ -242,64 +186,97 @@ export default function Accueil() {
             </RevealItem>
           ))}
         </RevealGroup>
-      </section>
 
-      {/* ——— Témoignage ——————————————————————————————— */}
-      <section className="bg-albatre py-[var(--spacing-section)]">
-        <div className="frame-narrow text-center">
-          <Reveal geste="fondu">
-            <blockquote>
-              <p className="text-[length:var(--text-h3)] leading-[1.35] font-light">
-                « {temoignages[0].texte} »
-              </p>
-              <footer className="label-micro mt-12 text-greige">
-                {temoignages[0].auteur} — {temoignages[0].lieu}
-              </footer>
-            </blockquote>
-          </Reveal>
+        <Filet className="mt-20 text-ink" />
+        <RevealGroup
+          as="dl"
+          className="grid grid-cols-2 gap-y-12 pt-14 md:grid-cols-4"
+          pas={0.07}
+        >
+          {reperes.map((r) => (
+            <RevealItem key={r.legende}>
+              <dt className="numeral text-[length:var(--text-h2)] leading-none">
+                {r.valeur}
+                <span className="text-[0.38em] align-super ml-1 text-greige">
+                  {r.suffixe}
+                </span>
+              </dt>
+              <dd className="label-micro mt-5 max-w-[22ch] tracking-[0.2em] text-greige">
+                {r.legende}
+              </dd>
+            </RevealItem>
+          ))}
+        </RevealGroup>
+      </Respiration>
+
+      {/* ——— Troisième histoire ————————————————————————— */}
+      <Plan
+        href={`/histoires/${selection[2].slug}`}
+        image={selection[2].couverture}
+        titre={selection[2].titre}
+        hautGauche={
+          <span className="label-micro text-paper/60">
+            Nº 03 — {selection[2].region}
+          </span>
+        }
+        basGauche={
+          <span className="label-micro text-paper/60">
+            {selection[2].couple} · {selection[2].saison} {selection[2].annee}
+          </span>
+        }
+        basDroite={
+          <span className="label-micro text-paper/60">Voir l&apos;histoire</span>
+        }
+      />
+
+      {/* Un lien ne peut pas en contenir un autre : l'accès à l'index sort
+          du plan et prend sa propre bande. */}
+      <section className="bg-ink text-paper">
+        <div className="frame flex flex-wrap items-center justify-between gap-6 py-10">
+          <span className="label-micro text-brume">
+            Six célébrations, choisies pour ce qu&apos;elles ont exigé
+          </span>
+          <Link href="/histoires" className="label link-draw">
+            Toutes les histoires
+          </Link>
         </div>
       </section>
 
-      {/* ——— Invitation ——————————————————————————————— */}
-      <section className="frame py-[var(--spacing-section)]">
-        <div className="grid gap-14 lg:grid-cols-12">
-          <div className="lg:col-span-5">
-            <Plate
-              plate={{
-                src: "/plates/accueil-savoir-faire.jpg",
-                alt: "Atelier de tirage, lumière basse sur une table de travail",
-                ratio: "paysage",
-              }}
-              sizes="(max-width: 1024px) 100vw, 40vw"
-            />
-          </div>
-          <div className="lg:col-span-6 lg:col-start-7">
-            <Reveal>
-              <Etiquette index="05" accent="sauge" className="text-greige">
-                Nous écrire
-              </Etiquette>
-            </Reveal>
-            <TitreAnime className="mt-10">
-              Dites-nous la date, le lieu, et ce que vous voulez garder.
-            </TitreAnime>
-            <Reveal delay={0.08}>
-              <Chapeau className="mt-10 max-w-lg text-ardoise">
-                Nous répondons à chaque lettre sous quarante-huit heures, par
-                une note d&apos;intention écrite — pas par une plaquette
-                tarifaire.
-              </Chapeau>
-              <div className="mt-12 flex flex-wrap items-center gap-x-10 gap-y-5">
-                <Link href="/contact" className="label link-draw">
-                  Prendre contact
-                </Link>
-                <Link href="/experience" className="label link-erase text-greige">
-                  Voir les collections
-                </Link>
-              </div>
-            </Reveal>
-          </div>
-        </div>
-      </section>
+      {/* ——— Respiration : témoignage ————————————————————— */}
+      <Respiration etroit className="text-center">
+        <Reveal geste="fondu">
+          <blockquote>
+            <p className="text-[length:var(--text-h3)] leading-[1.35] font-light">
+              « {temoignages[0].texte} »
+            </p>
+            <footer className="label-micro mt-12 text-greige">
+              {temoignages[0].auteur} — {temoignages[0].lieu}
+            </footer>
+          </blockquote>
+        </Reveal>
+      </Respiration>
+
+      {/* ——— Plan d'invitation ————————————————————————— */}
+      <Plan
+        href="/contact"
+        hauteur="moyen"
+        image={{
+          src: "/plates/contact-colonne.jpg",
+          alt: "Lumière de fin de jour sur un mur clair",
+        }}
+        titre="Dites-nous la date, le lieu, et ce que vous voulez garder"
+        hautGauche={<span className="label-micro text-paper/60">Nous écrire</span>}
+        basGauche={
+          <span className="label link-draw text-[0.6875rem]">
+            Prendre contact
+          </span>
+        }
+        basDroite={
+          <span className="label-micro text-paper/60">
+            Réponse sous 48 heures
+          </span>
+        }
+      />
     </>
   );
 }

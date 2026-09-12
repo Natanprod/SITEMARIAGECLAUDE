@@ -10,8 +10,9 @@ import { EASE_RIDEAU, EASE_MAISON } from "@/lib/motion";
 /**
  * L'en-tête.
  *
- * Toutes les pages s'ouvrent sur un bandeau encre : l'en-tête est donc
- * clair au repos, et bascule sur fond papier dès que la page défile.
+ * En plein cadre, le site est sombre de bout en bout : l'en-tête reste
+ * clair en toutes circonstances et ne gagne, au défilement, qu'un fond
+ * d'encre voilé pour se détacher de l'image qui passe dessous.
  * Aucun logo dessiné — la marque est une composition typographique.
  */
 export function SiteHeader() {
@@ -44,16 +45,15 @@ export function SiteHeader() {
     return () => window.removeEventListener("keydown", surEchap);
   }, []);
 
-  const clair = !defile || menu;
-
   return (
     <>
       <header
         className={[
           "fixed inset-x-0 top-0 z-50 transition-colors duration-700",
+          "text-paper",
           defile && !menu
-            ? "bg-paper/92 backdrop-blur-[2px] text-ink"
-            : "bg-transparent text-paper",
+            ? "bg-noir/82 backdrop-blur-[3px]"
+            : "bg-transparent",
         ].join(" ")}
       >
         <div className="frame flex items-center justify-between py-5 md:py-6">
@@ -66,12 +66,7 @@ export function SiteHeader() {
             <span className="font-[family-name:var(--font-display)] text-[1.0625rem] leading-none tracking-[0.02em]">
               {maison.nom}
             </span>
-            <span
-              className={[
-                "label-micro hidden transition-opacity duration-700 sm:inline",
-                clair ? "opacity-50" : "opacity-40",
-              ].join(" ")}
-            >
+            <span className="label-micro hidden opacity-55 sm:inline">
               Maison d&apos;image
             </span>
           </Link>

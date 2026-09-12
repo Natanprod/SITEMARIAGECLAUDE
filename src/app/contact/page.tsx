@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import { Masthead } from "@/components/masthead";
-import { Plate } from "@/components/plate";
+import { Plan } from "@/components/plan";
+import { Respiration } from "@/components/respiration";
 import { ContactForm } from "@/components/contact-form";
 import { Reveal } from "@/components/reveal";
 import { Etiquette, Filet } from "@/components/editorial";
@@ -15,28 +15,35 @@ export const metadata: Metadata = {
 export default function Contact() {
   return (
     <>
-      <Masthead
-        hauteur="court"
-        etiquette="05 — Contact"
-        accent="sauge"
-        lignes={["Écrire", "à la maison"]}
-        chapeau={
-          <p className="font-light">
-            Une date, un lieu, et ce que vous voulez garder. Cela suffit pour
-            commencer.
-          </p>
-        }
+      <Plan
+        hauteur="grand"
+        priority
         image={{
           src: "/plates/contact-colonne.jpg",
           alt: "Lumière de fin de jour sur un mur clair",
         }}
+        titre="Écrire à la maison"
+        hautGauche={<span className="label text-paper/60">05 — Contact</span>}
+        basGauche={
+          <p className="max-w-lg text-paper/75">
+            Une date, un lieu, et ce que vous voulez garder. Cela suffit pour
+            commencer.
+          </p>
+        }
+        basDroite={
+          <span className="label-micro text-terre-clair">
+            Réponse sous 48 heures
+          </span>
+        }
       />
 
-      <section className="frame py-[var(--spacing-section)]">
+      <Respiration>
         <div className="grid gap-16 lg:grid-cols-12">
           <div className="lg:col-span-7">
             <Reveal>
-              <Etiquette accent="sauge" className="text-greige">La lettre</Etiquette>
+              <Etiquette accent="sauge" className="text-greige">
+                La lettre
+              </Etiquette>
             </Reveal>
             <Reveal delay={0.08}>
               <div className="mt-12">
@@ -47,12 +54,14 @@ export default function Contact() {
 
           <div className="lg:col-span-4 lg:col-start-9">
             <Reveal large>
-              <Etiquette className="text-greige">Directement</Etiquette>
+              <Etiquette accent="sauge" className="text-greige">
+                Directement
+              </Etiquette>
               <dl className="mt-12 space-y-8">
                 <div>
                   <dt className="label-micro text-greige">Courriel</dt>
                   <dd className="mt-3">
-                    <a href={`mailto:${maison.email}`} className="link-erase">
+                    <a href={`mailto:${maison.email}`} className="link-draw">
                       {maison.email}
                     </a>
                   </dd>
@@ -62,7 +71,7 @@ export default function Contact() {
                   <dd className="mt-3">
                     <a
                       href={`tel:${maison.telephone.replace(/\s/g, "")}`}
-                      className="link-erase"
+                      className="link-draw"
                     >
                       {maison.telephone}
                     </a>
@@ -90,20 +99,9 @@ export default function Contact() {
                 davantage.
               </p>
             </Reveal>
-
-            <div className="mt-16">
-              <Plate
-                plate={{
-                  src: "/plates/maison-matiere.jpg",
-                  alt: "Détail de papier coton",
-                  ratio: "carre",
-                }}
-                sizes="(max-width: 1024px) 100vw, 30vw"
-              />
-            </div>
           </div>
         </div>
-      </section>
+      </Respiration>
     </>
   );
 }

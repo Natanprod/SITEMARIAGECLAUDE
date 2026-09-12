@@ -2,7 +2,7 @@
 
 import { motion, useReducedMotion } from "framer-motion";
 import { Fragment, type ReactNode } from "react";
-import { EASE_RIDEAU, seuil } from "@/lib/motion";
+import { EASE_MAISON, EASE_RIDEAU, seuil } from "@/lib/motion";
 
 /**
  * Le titre de section, mot à mot.
@@ -14,13 +14,19 @@ import { EASE_RIDEAU, seuil } from "@/lib/motion";
  * de transformer la lecture en défilé. Il ne doit pas non plus être posé
  * dans un <Reveal> : le fondu du parent dissoudrait le cache et le geste
  * perdrait sa netteté. Il porte donc son propre déclencheur.
+ *
+ * `geste="dilate"` substitue au découpage la fermeture de l'interlettrage,
+ * de 0,14 em à −0,03 : c'est le geste des plans, et il tient sur un fond
+ * sombre là où le cache mot à mot suppose un fond franc.
  */
 export function TitreAnime({
   children,
   className = "",
+  geste = "mots",
 }: {
   children: ReactNode;
   className?: string;
+  geste?: "mots" | "dilate";
 }) {
   const reduit = useReducedMotion();
   const base = `text-[length:var(--text-h2)] leading-[1.04] ${className}`;
@@ -30,6 +36,20 @@ export function TitreAnime({
 
   if (reduit || !texte) {
     return <h2 className={base}>{children}</h2>;
+  }
+
+  if (geste === "dilate") {
+    return (
+      <motion.h2
+        className={base}
+        initial={{ letterSpacing: "0.14em" }}
+        whileInView={{ letterSpacing: "-0.02em" }}
+        viewport={seuil}
+        transition={{ duration: 1.6, ease: EASE_MAISON }}
+      >
+        {texte}
+      </motion.h2>
+    );
   }
 
   const mots = texte.split(/\s+/);

@@ -25,16 +25,19 @@ vient de la composition, de l'espace, de la typographie et du mouvement —
 jamais d'un élément décoratif. Aucune fleur, aucun pastel, aucune écriture
 manuscrite, aucun ornement romantique.
 
-Trois constantes tiennent le site :
+La direction retenue est **« Le Plein Cadre »**, choisie parmi trois pistes
+présentées. Trois constantes la tiennent :
 
-1. **Chaque page s'ouvre sur un bandeau encre.** Le titre monte derrière un
-   cache, l'image reste en retrait derrière un voile. On reconnaît la maison
-   avant d'avoir lu un mot.
-2. **L'image d'abord, le texte ensuite.** Aucune vignette n'a de bouton : la
-   planche entière est le lien.
-3. **Les grilles ne sont jamais régulières.** Sept colonnes puis quatre, un
-   décalage vertical, une planche pleine largeur. Le regard ne doit pas
-   s'installer.
+1. **La gouttière disparaît.** L'image touche les quatre bords ; le texte
+   s'installe dans ses angles. La page n'est plus une grille, c'est une suite
+   de plans qui tiennent chacun l'écran.
+2. **La nuit est le fond par défaut.** Le papier ne revient que pour respirer,
+   entre deux plans, là où le texte reprend la main.
+3. **Aucun mouvement vertical.** Un volet horizontal découvre le plan,
+   l'échelle de l'image se resserre, l'interlettrage du titre se referme.
+
+Deux composants portent toute la direction : `Plan` (le plein cadre) et
+`Respiration` (l'intervalle clair). Une page se compose en les alternant.
 
 ### Deux arbitrages, énoncés
 
@@ -66,12 +69,13 @@ d'accélération. Rien n'est codé en dur dans les composants.
 
 | Rôle | Jeton | Valeur |
 | --- | --- | --- |
-| Fond principal | `paper` | `#f2eee5` |
-| Fond secondaire | `albatre` | `#faf8f3` |
-| Sections sombres | `ink` / `noir` | `#16130f` / `#0a0a09` |
-| Texte courant | `ardoise` | `#2a2621` |
-| Texte secondaire | `greige` | `#a49c8e` |
-| Accents champêtres | `sauge` `tournesol` `lilas` `terre` | `#8c9c7d` `#cfa02a` `#9a90b4` `#b0644a` |
+| Fond par défaut | `noir` / `ink` | `#0a0a09` / `#16130f` |
+| Respirations | `paper` / `albatre` | `#f2eee5` / `#faf8f3` |
+| Texte courant sur clair | `ardoise` | `#2a2621` |
+| Secondaire sur clair | `greige` | `#736a5c` |
+| Secondaire sur sombre | `brume` | `#9a9183` |
+| Accents champêtres | `sauge` `tournesol` `lilas` `terre` | `#8c9c7d` `#cfa02a` `#9a90b4` `#9f553c` |
+| Terracotta de nuit | `terre-clair` | `#c0674a` |
 
 ---
 
@@ -184,11 +188,12 @@ Les gestes en place :
 
 | Geste | Où | Fichier |
 | --- | --- | --- |
-| Titre du bandeau monté ligne par ligne, parallaxe de l'image d'ouverture | Toutes les pages | `masthead.tsx` |
-| Rideau d'ouverture des planches, remise à l'échelle de l'image | Chaque image | `plate.tsx` |
-| **Parallaxe interne** — l'image dérive moins vite que son cadre | Chaque image | `plate.tsx` |
-| Montée cadencée des blocs de texte | Partout | `reveal.tsx` |
-| **Titres de section mot à mot** | Huit titres, jamais le texte courant | `titre-anime.tsx` |
+| Volet horizontal qui découvre le plan | Chaque plan | `plan.tsx` |
+| Échelle de l'image qui se resserre de 1,16 à 1 | Chaque plan | `plan.tsx` |
+| Interlettrage du titre qui se referme de 0,14 em à −0,03 | Titres de plan | `plan.tsx` |
+| **Parallaxe interne** — l'image dérive moins vite que son plan | Chaque plan | `plan.tsx` |
+| Montée cadencée des blocs de texte | Respirations | `reveal.tsx` |
+| **Titres de section mot à mot** ou interlettrage (`geste="dilate"`) | Respirations | `titre-anime.tsx` |
 | **Lever de rideau** — le nom, un filet, puis le voile se lève | Première page de la session | `ouverture.tsx` |
 | Menu plein écran en rideau d'encre, trait qui se dessine sous les liens | En-tête, liens | `site-header.tsx`, `globals.css` |
 
@@ -205,7 +210,15 @@ Trois points de vigilance, appris en les corrigeant :
   que le flex ne rend pas.
 - **Un titre mot à mot ne se met pas dans un `<Reveal>`.** Le fondu du parent
   dissout le cache et le geste perd sa netteté : le titre porte son propre
-  déclencheur et sort du bloc.
+  déclencheur et sort du bloc. Sur fond sombre, le cache suppose un fond
+  franc : les plans emploient `geste="dilate"` à la place.
+- **En plein cadre, l'image déborde son plan avant de se resserrer.** Le plan
+  la découpe (`overflow: hidden`), et `html` est clippé horizontalement par
+  précaution — `clip` ne crée pas de conteneur de défilement, donc ni le
+  collant de l'en-tête ni le défilement doux n'en souffrent.
+- **Un lien ne peut pas en contenir un autre.** Un plan cliquable est déjà un
+  `<a>` : y glisser un `<Link>` dans un angle produit une erreur
+  d'hydratation. L'accès secondaire sort du plan et prend sa propre bande.
 
 `prefers-reduced-motion` est respecté partout : les composants ne dégradent
 pas l'animation, **ils la retirent** et affichent le contenu directement.
@@ -233,12 +246,13 @@ src/
     globals.css           jetons et utilitaires
     sitemap.ts robots.ts not-found.tsx
   components/
+    plan.tsx              le plein cadre — unité de la direction
+    respiration.tsx       l'intervalle clair entre deux plans
+    ouverture.tsx         le lever de rideau (CSS, une fois par session)
     site-header.tsx       en-tête + menu plein écran
     site-footer.tsx
-    masthead.tsx          bandeau d'ouverture (toutes les pages)
-    plate.tsx             la planche — unité d'image
-    film-frame.tsx        cadre de film (lecteur si source fournie)
-    story-card.tsx  reveal.tsx  editorial.tsx  contact-form.tsx
+    film-frame.tsx        plan de film (lecteur si source fournie)
+    titre-anime.tsx  reveal.tsx  editorial.tsx  contact-form.tsx
   content/                tout le texte
   lib/motion.ts           variantes d'animation
 scripts/generate-plates.mjs

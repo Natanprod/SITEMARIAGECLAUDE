@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
-import { Masthead } from "@/components/masthead";
-import { StoryCard } from "@/components/story-card";
+import { Plan } from "@/components/plan";
+import { Respiration } from "@/components/respiration";
 import { Reveal } from "@/components/reveal";
-import { Filet } from "@/components/editorial";
+import { TitreAnime } from "@/components/titre-anime";
+import { Etiquette } from "@/components/editorial";
 import { stories } from "@/content/stories";
 
 export const metadata: Metadata = {
@@ -12,67 +13,76 @@ export const metadata: Metadata = {
 };
 
 /**
- * L'index des histoires.
- * Rythme volontairement irrégulier : une planche pleine largeur, puis deux
- * colonnes décalées. Le regard ne doit jamais s'installer dans une grille.
+ * L'index des histoires en plein cadre.
+ *
+ * Plus de grille : une célébration par plan, dans l'ordre, comme on
+ * déroulerait une bobine. C'est la page où la direction se justifie le
+ * mieux — chaque mariage tient l'écran seul, sans voisinage.
  */
-const RYTHME = [
-  { col: "md:col-span-12", ratio: "cinema", sizes: "100vw", pt: "" },
-  { col: "md:col-span-6", ratio: "portrait", sizes: "50vw", pt: "" },
-  { col: "md:col-span-5 md:col-start-8", ratio: "paysage", sizes: "45vw", pt: "md:pt-32" },
-  { col: "md:col-span-7", ratio: "paysage", sizes: "58vw", pt: "" },
-  { col: "md:col-span-4 md:col-start-9", ratio: "portrait", sizes: "35vw", pt: "md:pt-20" },
-  { col: "md:col-span-9 md:col-start-3", ratio: "cinema", sizes: "75vw", pt: "" },
-] as const;
-
 export default function Histoires() {
   return (
     <>
-      <Masthead
-        hauteur="court"
-        etiquette="02 — Histoires"
-        accent="terre"
-        lignes={["Six célébrations,", "six exigences"]}
-        chapeau={
-          <p className="font-light">
-            Chaque mariage impose sa contrainte : une lumière, un lieu, un
-            nombre. Ces six-là ont été retenus pour ce qu&apos;ils ont demandé.
-          </p>
-        }
+      <Plan
+        hauteur="grand"
+        priority
         image={{
           src: "/plates/histoires-ouverture.jpg",
           alt: "Intérieur sombre traversé par un pan de lumière",
         }}
+        titre="Six célébrations, six exigences"
+        hautGauche={<span className="label text-paper/60">02 — Histoires</span>}
+        basGauche={
+          <p className="max-w-lg text-paper/75">
+            Chaque mariage impose sa contrainte : une lumière, un lieu, un
+            nombre. Ces six-là ont été retenus pour ce qu&apos;ils ont demandé.
+          </p>
+        }
+        basDroite={
+          <span className="label-micro text-terre-clair">Six plans</span>
+        }
       />
 
-      <section className="frame py-[var(--spacing-section)]">
-        <div className="grid gap-x-8 gap-y-24 md:grid-cols-12">
-          {stories.map((story, i) => {
-            const r = RYTHME[i % RYTHME.length];
-            return (
-              <Reveal
-                key={story.slug}
-                className={`${r.col} ${r.pt}`}
-                large
-              >
-                <StoryCard
-                  story={story}
-                  ratio={r.ratio}
-                  numero={String(i + 1).padStart(2, "0")}
-                  sizes={`(max-width: 768px) 100vw, ${r.sizes}`}
-                />
-              </Reveal>
-            );
-          })}
-        </div>
+      {stories.map((story, i) => (
+        <Plan
+          key={story.slug}
+          href={`/histoires/${story.slug}`}
+          hauteur={i % 3 === 1 ? "moyen" : "grand"}
+          image={story.couverture}
+          titre={story.titre}
+          hautGauche={
+            <span className="label-micro text-paper/60">
+              Nº {String(i + 1).padStart(2, "0")} — {story.region}
+            </span>
+          }
+          basGauche={
+            <span className="label-micro text-paper/60">
+              {story.couple} · {story.lieu} · {story.saison} {story.annee}
+            </span>
+          }
+          basDroite={
+            <span className="label-micro text-paper/60">
+              Voir l&apos;histoire
+            </span>
+          }
+        />
+      ))}
 
-        <Filet className="mt-28 text-ink" />
+      <Respiration ton="encre" etroit className="text-center">
         <Reveal>
-          <p className="label mt-10 text-greige">
-            Une part importante de notre travail n&apos;est jamais publiée.
+          <Etiquette accent="terre" className="justify-center text-brume">
+            Ce qui n&apos;est pas montré
+          </Etiquette>
+        </Reveal>
+        <TitreAnime geste="dilate" className="mt-10">
+          Une part importante de notre travail n&apos;est jamais publiée.
+        </TitreAnime>
+        <Reveal delay={0.1}>
+          <p className="mx-auto mt-10 max-w-xl text-paper/70">
+            Aucun mariage n&apos;est publié sans accord écrit. Cela convient
+            parfaitement à la maison.
           </p>
         </Reveal>
-      </section>
+      </Respiration>
     </>
   );
 }

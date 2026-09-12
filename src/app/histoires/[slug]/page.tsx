@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Masthead } from "@/components/masthead";
-import { Plate } from "@/components/plate";
+import { Plan } from "@/components/plan";
+import { Respiration } from "@/components/respiration";
 import { Reveal, RevealGroup, RevealItem } from "@/components/reveal";
 import { Etiquette, Filet } from "@/components/editorial";
 import { getStory, stories, storyNeighbours } from "@/content/stories";
@@ -30,10 +30,9 @@ export async function generateMetadata(
 }
 
 /**
- * Une histoire.
- *
- * Construction en trois temps : le bandeau, le récit adossé à la fiche
- * technique, puis la planche-contact — cinq images au rythme décalé.
+ * Une histoire, en trois temps : le plan d'ouverture, une respiration où
+ * le récit reprend la main, puis la suite des planches — chacune en plein
+ * cadre, sans gouttière, comme un montage.
  */
 export default async function Histoire(props: PageProps<"/histoires/[slug]">) {
   const { slug } = await props.params;
@@ -41,26 +40,42 @@ export default async function Histoire(props: PageProps<"/histoires/[slug]">) {
   if (!story) notFound();
 
   const { precedente, suivante } = storyNeighbours(slug);
-  const [p1, p2, p3, p4] = story.planches;
 
   return (
     <>
-      <Masthead
-        hauteur="court"
-        etiquette={`${story.lieu} — ${story.region}`}
-        accent="terre"
-        lignes={[story.titre]}
-        meta={[story.couple, `${story.saison} ${story.annee}`, ...story.prestations]}
-        image={{ src: story.couverture.src, alt: story.couverture.alt }}
-        voile={0.5}
+      <Plan
+        hauteur="plein"
+        priority
+        image={story.couverture}
+        titre={story.titre}
+        hautGauche={
+          <span className="label text-paper/60">
+            {story.lieu} — {story.region}
+          </span>
+        }
+        basGauche={
+          <div className="flex flex-wrap gap-x-10 gap-y-2">
+            <span className="label-micro text-paper/60">{story.couple}</span>
+            <span className="label-micro text-paper/60">
+              {story.saison} {story.annee}
+            </span>
+          </div>
+        }
+        basDroite={
+          <span className="label-micro text-paper/60">
+            {story.prestations.join(" · ")}
+          </span>
+        }
       />
 
-      {/* ——— Récit ————————————————————————————————————— */}
-      <section className="frame py-[var(--spacing-section)]">
+      {/* ——— Respiration : le récit ————————————————————— */}
+      <Respiration>
         <div className="grid gap-14 lg:grid-cols-12">
           <div className="lg:col-span-3">
             <Reveal>
-              <Etiquette accent="terre" className="text-greige">La commande</Etiquette>
+              <Etiquette accent="terre" className="text-greige">
+                La commande
+              </Etiquette>
               <dl className="mt-10 space-y-6">
                 {[
                   ["Lieu", `${story.lieu}, ${story.region}`],
@@ -91,53 +106,62 @@ export default async function Histoire(props: PageProps<"/histoires/[slug]">) {
             </RevealGroup>
           </div>
         </div>
-      </section>
+      </Respiration>
 
-      {/* ——— Planches ————————————————————————————————— */}
-      <section className="frame pb-[var(--spacing-section)]">
-        <div className="grid gap-x-8 gap-y-20 md:grid-cols-12">
-          <Reveal className="md:col-span-7" large>
-            <Plate plate={p1} sizes="(max-width: 768px) 100vw, 58vw" />
-          </Reveal>
-          <Reveal className="md:col-span-4 md:col-start-9 md:self-end" large>
-            <Plate plate={p2} sizes="(max-width: 768px) 100vw, 33vw" />
-          </Reveal>
-          <Reveal className="md:col-span-5 md:pt-10" large>
-            <Plate plate={p3} sizes="(max-width: 768px) 100vw, 42vw" />
-          </Reveal>
-          <Reveal className="md:col-span-12" large>
-            <Plate plate={p4} sizes="100vw" />
-          </Reveal>
-        </div>
-      </section>
+      {/* ——— Les planches, en plans ————————————————————— */}
+      {story.planches.map((planche, i) => (
+        <Plan
+          key={planche.src}
+          hauteur={
+            planche.ratio === "portrait" || planche.ratio === "colonne"
+              ? "grand"
+              : planche.ratio === "carre"
+                ? "moyen"
+                : "bande"
+          }
+          voile={0.55}
+          image={planche}
+          hautGauche={
+            <span className="label-micro text-paper/60">
+              {String(i + 1).padStart(2, "0")} / {story.planches.length}
+            </span>
+          }
+          basGauche={
+            <span className="label-micro text-paper/60">{planche.alt}</span>
+          }
+        />
+      ))}
 
       {/* ——— Navigation entre histoires ————————————————— */}
-      <section className="frame pb-[var(--spacing-section)]">
-        <Filet className="text-ink" />
+      <Respiration ton="encre">
+        <Filet className="text-paper" />
         <div className="flex flex-col gap-10 pt-12 sm:flex-row sm:items-end sm:justify-between">
           {precedente ? (
             <Link href={`/histoires/${precedente.slug}`} className="group">
-              <span className="label-micro text-greige">Précédente</span>
-              <span className="mt-4 block text-[length:var(--text-h3)] leading-none transition-opacity duration-500 group-hover:opacity-55">
+              <span className="label-micro text-brume">Précédente</span>
+              <span className="mt-4 block text-[length:var(--text-h3)] leading-none transition-opacity duration-500 group-hover:opacity-60">
                 {precedente.titre}
               </span>
             </Link>
           ) : null}
 
-          <Link href="/histoires" className="label link-draw shrink-0 text-greige">
+          <Link href="/histoires" className="label link-draw shrink-0 text-brume">
             Toutes les histoires
           </Link>
 
           {suivante ? (
-            <Link href={`/histoires/${suivante.slug}`} className="group sm:text-right">
-              <span className="label-micro text-greige">Suivante</span>
-              <span className="mt-4 block text-[length:var(--text-h3)] leading-none transition-opacity duration-500 group-hover:opacity-55">
+            <Link
+              href={`/histoires/${suivante.slug}`}
+              className="group sm:text-right"
+            >
+              <span className="label-micro text-brume">Suivante</span>
+              <span className="mt-4 block text-[length:var(--text-h3)] leading-none transition-opacity duration-500 group-hover:opacity-60">
                 {suivante.titre}
               </span>
             </Link>
           ) : null}
         </div>
-      </section>
+      </Respiration>
     </>
   );
 }

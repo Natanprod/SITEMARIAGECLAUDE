@@ -1,9 +1,9 @@
 @import "tailwindcss";
 
 /* ==========================================================================
-   MAISON — Système de design
-   Base sobre (encre / papier / greige) + accents champêtres employés
-   uniquement en filets, capitales fines, tirages duotone et états de survol.
+   MAISON — Système de design · direction « Le Plein Cadre »
+   La nuit est le fond par défaut ; le papier ne revient que pour respirer.
+   L'image touche les quatre bords, le texte s'installe dans ses angles.
    ========================================================================== */
 
 @theme {
@@ -11,7 +11,10 @@
   --color-noir: #0a0a09;
   --color-ink: #16130f;
   --color-ardoise: #2a2621;
+  /* Secondaire sur fond clair (4,6:1 sur papier). */
   --color-greige: #736a5c;
+  /* Secondaire sur fond sombre (6,4:1 sur noir) — le pendant du greige. */
+  --color-brume: #9a9183;
   --color-lin: #ded7c9;
   --color-paper: #f2eee5;
   --color-albatre: #faf8f3;
@@ -24,6 +27,9 @@
   --color-tournesol: #cfa02a;
   --color-lilas: #9a90b4;
   --color-terre: #9f553c;
+  /* Terracotta réchauffée pour la nuit : 5:1 sur noir, 4,7:1 sur encre.
+     C'est le seul accent qui traverse tout le site en plein cadre. */
+  --color-terre-clair: #c0674a;
 
   /* --- Typographie --- */
   --font-display: var(--font-alfa), "Alfa Slab One", Georgia, serif;
@@ -61,11 +67,16 @@
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
     scroll-behavior: smooth;
+    /* En plein cadre, l'image au repos déborde son plan de 16 % avant de
+       se resserrer. Le plan la découpe, mais on ferme aussi la porte ici :
+       `clip` ne crée pas de conteneur de défilement, donc ni le collant
+       de l'en-tête ni le défilement doux n'en souffrent. */
+    overflow-x: clip;
   }
 
   body {
-    background-color: var(--color-paper);
-    color: var(--color-ink);
+    background-color: var(--color-noir);
+    color: var(--color-paper);
     font-family: var(--font-sans);
     font-size: var(--text-body);
     line-height: 1.62;
@@ -74,8 +85,8 @@
   }
 
   ::selection {
-    background-color: var(--color-ink);
-    color: var(--color-paper);
+    background-color: var(--color-terre-clair);
+    color: var(--color-noir);
   }
 
   h1,
@@ -200,6 +211,44 @@
   &:hover::after {
     opacity: 1;
   }
+}
+
+/* Le plan : l'image tient l'écran, aucune gouttière.
+   La hauteur se règle en svh pour ne pas sauter quand la barre d'adresse
+   d'un téléphone se rétracte. */
+@utility plan {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background-color: var(--color-noir);
+}
+
+/* Les angles du plan : c'est là, et nulle part ailleurs, que le texte
+   s'installe. Marges calées sur la gouttière pour rester alignées avec
+   les respirations. */
+@utility angle {
+  position: absolute;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-width: min(90%, 46rem);
+}
+
+/* Voile de lisibilité. Jamais un aplat : une descente depuis le bas,
+   pour que le haut de l'image reste intact. */
+@utility voile {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: linear-gradient(
+    to top,
+    rgb(10 10 9 / 0.88) 0%,
+    rgb(10 10 9 / 0.34) 46%,
+    rgb(10 10 9 / 0.16) 72%,
+    rgb(10 10 9 / 0.46) 100%
+  );
 }
 
 /* Grain argentique : posé sur toute la page, quasi imperceptible */
