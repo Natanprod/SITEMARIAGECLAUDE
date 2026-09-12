@@ -2,6 +2,9 @@ import type { MetadataRoute } from "next";
 import { maison } from "@/content/site";
 import { stories } from "@/content/stories";
 
+/** Le site est entièrement statique : ces deux routes le sont aussi. */
+export const dynamic = "force-static";
+
 const BASE = maison.url;
 
 export default function sitemap(): MetadataRoute.Sitemap {

@@ -11,10 +11,29 @@ Tailwind CSS v4, Framer Motion. Toutes les pages sont prérendues en statique.
 ```bash
 npm install
 npm run dev      # http://localhost:3000
-npm run build    # build de production
+npm run build    # produit le dossier out/ — le site en fichiers statiques
 npm run lint
 npm run plates   # (re)fabrique les planches de substitution
 ```
+
+## Mettre en ligne
+
+`next build` exporte le site entier dans `out/`. Aucun serveur Node n'est
+nécessaire : **téléverser le contenu de `out/` dans `public_html`** suffit
+(Hostinger, OVH, n'importe quel hébergement mutualisé).
+
+Pour regarder le dossier en local, il faut un petit serveur — un double-clic
+sur `index.html` ne suffit pas, le navigateur bloque les fichiers voisins :
+
+```bash
+cd out && python3 -m http.server 8000   # puis http://localhost:8000
+```
+
+Contrepartie de l'export statique : `next/image` ne redimensionne plus à la
+volée (`images.unoptimized`), les fichiers déposés dans `public/plates/`
+doivent donc déjà être aux bonnes dimensions. Sur un hébergement qui exécute
+Node (Vercel, Netlify), retirer les trois options de `next.config.ts` rétablit
+l'optimisation automatique.
 
 ---
 
