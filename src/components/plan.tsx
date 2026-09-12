@@ -45,8 +45,16 @@ export type PlanProps = {
  *
  * L'image touche les quatre bords, le texte s'installe dans les angles.
  * Trois gestes à l'entrée, tous horizontaux ou d'échelle, jamais verticaux :
- * un volet découvre le plan, l'image se resserre de 1,16 à 1, et
- * l'interlettrage du titre se referme de 0,14 em à −0,03.
+ * un volet découvre le plan, l'image se resserre de 1,16 à 1, et un second
+ * volet découvre le titre de la gauche vers la droite.
+ *
+ * Le titre était d'abord animé par l'interlettrage, qui se refermait de
+ * 0,14 em à −0,03. C'était un défaut : l'interlettrage change la largeur
+ * mesurée du texte, donc l'endroit où il se coupe. « La lumière de juin »
+ * commençait sur deux lignes (159 px) et finissait sur une (80 px) — le
+ * titre sautait en pleine animation. Un volet ne touche pas à la mise en
+ * page : le texte est composé une fois, à sa graisse définitive, et on ne
+ * fait que le découvrir.
  *
  * Comme pour les planches, l'observateur d'intersection est porté par
  * l'enveloppe et non par la couche découpée : un élément entièrement
@@ -181,18 +189,18 @@ export function Plan({
       >
         {titre ? (
           <motion.h2
-            className="max-w-[16ch] text-[length:var(--text-h1)] leading-[0.98]"
+            className="max-w-[16ch] text-[length:var(--text-h1)] leading-[0.98] tracking-[-0.03em]"
             variants={
               reduit
                 ? undefined
                 : {
-                    repos: { letterSpacing: "0.14em" },
+                    repos: { clipPath: "inset(0 100% 0 0)" },
                     entre: {
-                      letterSpacing: "-0.03em",
+                      clipPath: "inset(0 0% 0 0)",
                       transition: {
-                        duration: 1.6,
-                        ease: EASE_MAISON,
-                        delay: 0.5,
+                        duration: 1.25,
+                        ease: EASE_RIDEAU,
+                        delay: 0.45,
                       },
                     },
                   }

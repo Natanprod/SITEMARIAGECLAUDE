@@ -21,8 +21,8 @@ export function SiteFooter() {
             {maison.email}
           </a>
           <p className="mt-8 max-w-xl text-paper/65">
-            Douze mariages par an, pas davantage. Les dates d&apos;été se
-            retiennent le plus souvent douze à dix-huit mois à l&apos;avance.
+            Je retiens peu de mariages par an. Les dates d&apos;été se
+            réservent le plus souvent douze à dix-huit mois à l&apos;avance.
           </p>
         </div>
 

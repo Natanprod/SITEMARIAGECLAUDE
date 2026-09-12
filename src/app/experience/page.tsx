@@ -98,7 +98,7 @@ export default function Experience() {
           <Reveal>
             <Etiquette accent="tournesol" className="text-brume">Le déroulé</Etiquette>
           </Reveal>
-          <TitreAnime geste="dilate" className="mt-10 max-w-2xl">
+          <TitreAnime geste="volet" className="mt-10 max-w-2xl">
             De la première lettre à l&apos;objet posé sur votre table.
           </TitreAnime>
 
@@ -145,7 +145,7 @@ export default function Experience() {
               <Etiquette accent="tournesol" className="text-greige">Questions</Etiquette>
             </Reveal>
             <TitreAnime className="mt-10">
-              Les six que l&apos;on nous pose toujours.
+              Les six qu&apos;on me pose toujours.
             </TitreAnime>
           </div>
 

@@ -78,7 +78,7 @@ export const procedeFilm = [
     index: "I",
     titre: "Le repérage",
     texte:
-      "Nous visitons les lieux avant vous, à l'heure exacte de la célébration. La lumière d'un lieu n'est jamais une surprise — elle se calcule.",
+      "Je visite les lieux avant vous, à l'heure exacte de la célébration. La lumière d'un lieu n'est jamais une surprise — elle se calcule.",
   },
   {
     index: "II",
@@ -90,7 +90,7 @@ export const procedeFilm = [
     index: "III",
     titre: "L'étalonnage",
     texte:
-      "Chaque film reçoit une colorimétrie construite pour lui, inspirée d'une émulsion argentique choisie au repérage. Aucun réglage appliqué par défaut.",
+      "Chaque film reçoit une colorimétrie construite pour lui, inspirée d'une émulsion argentique que je choisis au repérage. Aucun réglage appliqué par défaut.",
   },
   {
     index: "IV",

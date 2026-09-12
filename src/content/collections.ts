@@ -73,13 +73,13 @@ export const deroule = [
     index: "01",
     titre: "La rencontre",
     texte:
-      "Un entretien d'une heure, chez vous ou en visioconférence. Nous cherchons à comprendre ce que vous voulez garder, pas à vendre une formule.",
+      "Un entretien d'une heure, chez vous ou en visioconférence. Je cherche à comprendre ce que vous voulez garder, pas à vous vendre une formule.",
   },
   {
     index: "02",
     titre: "La proposition",
     texte:
-      "Une note d'intention écrite : ce que nous photographierons, comment, avec quelle lumière et quelle matière. Le devis en découle.",
+      "Une note d'intention écrite : ce que je photographierai, comment, avec quelle lumière et quelle matière. Le devis en découle.",
   },
   {
     index: "03",
@@ -91,13 +91,13 @@ export const deroule = [
     index: "04",
     titre: "Le jour",
     texte:
-      "Nous sommes là avant tout le monde et nous partons après. Vous ne nous entendrez pas donner d'instructions, sauf pour les portraits — vingt minutes, pas davantage.",
+      "Je suis là avant tout le monde et je pars après. Vous ne m'entendrez pas donner d'instructions, sauf pour les portraits — vingt minutes, pas davantage.",
   },
   {
     index: "05",
     titre: "L'édition",
     texte:
-      "Six à huit semaines. La sélection est la part la plus longue du travail : nous écartons quatre-vingt-quinze pour cent de ce que nous produisons.",
+      "Six à huit semaines. La sélection est la part la plus longue du travail : j'écarte quatre-vingt-quinze pour cent de ce que je produis.",
   },
   {
     index: "06",
@@ -110,7 +110,7 @@ export const deroule = [
 export const questions = [
   {
     q: "Combien de mariages acceptez-vous par an ?",
-    r: "Douze au maximum. Cette limite n'est pas commerciale : au-delà, la part d'édition et de fabrication se dégrade, et c'est précisément là que se joue la différence.",
+    r: "Peu, et volontairement. La limite n'est pas commerciale : au-delà d'un certain nombre, la part d'édition et de fabrication se dégrade, et c'est précisément là que se joue la différence. Je préfère refuser une date que la traiter à moitié.",
   },
   {
     q: "Travaillez-vous à l'étranger ?",
@@ -118,7 +118,7 @@ export const questions = [
   },
   {
     q: "Photographie argentique ou numérique ?",
-    r: "Les deux, selon le projet. L'argentique apporte une matière et impose une lenteur ; le numérique garantit la basse lumière et le volume. La plupart de nos reportages mêlent les deux.",
+    r: "Les deux, selon le projet. L'argentique apporte une matière et impose une lenteur ; le numérique garantit la basse lumière et le volume. La plupart de mes reportages mêlent les deux.",
   },
   {
     q: "Quel est le délai de livraison ?",
@@ -126,7 +126,7 @@ export const questions = [
   },
   {
     q: "Publiez-vous tous les mariages ?",
-    r: "Aucun sans accord écrit. Une part importante de notre travail n'est jamais montrée, et cela convient parfaitement à la maison.",
+    r: "Aucun sans accord écrit. Une part importante de mon travail n'est jamais montrée, et cela me convient parfaitement.",
   },
   {
     q: "Comment réserve-t-on une date ?",

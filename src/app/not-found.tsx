@@ -9,7 +9,7 @@ export default function Introuvable() {
           Cette page n&apos;existe pas
         </h1>
         <p className="mt-10 max-w-md text-paper/70">
-          Une part importante de notre travail n&apos;est jamais publiée. Celle-ci,
+          Une part importante de mon travail n&apos;est jamais publiée. Celle-ci,
           en revanche, n&apos;a simplement jamais existé.
         </p>
         <div className="mt-14 flex flex-wrap gap-x-10 gap-y-4">

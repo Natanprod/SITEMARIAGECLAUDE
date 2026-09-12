@@ -53,7 +53,7 @@ export const stories: Story[] = [
       "Trois jours en Provence, une maison ouverte, et la certitude que le vrai sujet n'était pas la cérémonie.",
     recit: [
       "Il y a des mariages qui se jouent dans les marges. Celui-ci tenait dans la pénombre d'une cuisine à sept heures du matin, dans le geste d'une mère qui reprend un ourlet, dans le silence d'un père avant de traverser la cour.",
-      "Nous avons photographié trois jours comme on tourne un film : en repérant la lumière avant les visages, en laissant les scènes arriver plutôt qu'en les provoquant. Le domaine faisait le reste — une architecture sèche, des murs chauds, une ombre nette à midi.",
+      "J'ai photographié trois jours comme on tourne un film : en repérant la lumière avant les visages, en laissant les scènes arriver plutôt qu'en les provoquant. Le domaine faisait le reste — une architecture sèche, des murs chauds, une ombre nette à midi.",
       "Le tirage final compte quatre-vingts images et un film de sept minutes. Rien n'y est mis en scène, et pourtant tout y est composé.",
     ],
     prestations: ["Reportage trois jours", "Film 7 minutes", "Tirages d'art"],
@@ -97,7 +97,7 @@ export const stories: Story[] = [
       "Quatre générations sous le même toit, et la question de savoir ce qu'on garde d'une journée.",
     recit: [
       "La commande était simple : photographier la maison autant que le mariage. Les murs, les couloirs, les chambres où l'on se prépare, l'escalier qu'on descend une fois dans sa vie en robe.",
-      "Nous avons travaillé en argentique pour une partie du reportage — la matière du grain, la lenteur qu'elle impose, la manière dont elle oblige à choisir. Vingt-quatre poses par heure, pas davantage.",
+      "J'ai travaillé en argentique pour une partie du reportage — la matière du grain, la lenteur qu'elle impose, la manière dont elle oblige à choisir. Vingt-quatre poses par heure, pas davantage.",
       "Ce qui reste : un ensemble tenu, sans bavardage, qui ressemble moins à un mariage qu'à un portrait de famille étendu sur une journée.",
     ],
     prestations: ["Reportage deux jours", "Argentique moyen format", "Album relié main"],
@@ -140,7 +140,7 @@ export const stories: Story[] = [
     exergue: "Chaux blanche, oliviers, quarante degrés à l'ombre et rien à cacher.",
     recit: [
       "Une semaine dans les Pouilles, avec la contrainte la plus difficile qui soit : une lumière violente, sans nuance, du lever au coucher.",
-      "Nous avons construit le reportage autour de cette dureté au lieu de la corriger. Les ombres portées deviennent une écriture, le blanc des murs un fond de studio, la sieste une scène à part entière.",
+      "J'ai construit le reportage autour de cette dureté au lieu de la corriger. Les ombres portées deviennent une écriture, le blanc des murs un fond de studio, la sieste une scène à part entière.",
       "Le film tourné à cette occasion a la texture d'un long-métrage italien des années soixante-dix. C'était le projet dès le premier repérage.",
     ],
     prestations: ["Reportage destination", "Film 11 minutes", "Direction artistique"],
@@ -183,7 +183,7 @@ export const stories: Story[] = [
     exergue: "Une villa, une terrasse, et cent vingt invités qu'il fallait rendre invisibles.",
     recit: [
       "Le défi d'un grand mariage n'est pas le nombre : c'est de retrouver, dans la foule, les deux personnes qui en sont la raison.",
-      "Nous travaillons alors en focales longues, à distance, sans jamais interrompre. L'intimité se gagne par l'éloignement, pas par la proximité.",
+      "Je travaille alors en focales longues, à distance, sans jamais interrompre. L'intimité se gagne par l'éloignement, pas par la proximité.",
       "Le reportage alterne les plans larges — la mer, la terrasse, l'architecture — et des portraits pris à deux mètres, sans un mot échangé.",
     ],
     prestations: ["Reportage deux jours", "Second opérateur", "Film 9 minutes"],
@@ -226,8 +226,8 @@ export const stories: Story[] = [
     exergue: "Un mariage d'hiver, en ville, à la lumière des lustres et des vitrines.",
     recit: [
       "Paris en décembre offre quatre heures de lumière exploitable. Le reste se photographie à la nuit tombée, en assumant les hautes sensibilités et le grain qu'elles produisent.",
-      "Nous avons transformé cette contrainte en parti pris : un reportage nocturne, contrasté, plus proche du cinéma que du mariage, où les intérieurs dorés répondent au noir des rues.",
-      "Trente-deux images retenues sur mille huit cents. C'est notre proportion habituelle.",
+      "J'ai transformé cette contrainte en parti pris : un reportage nocturne, contrasté, plus proche du cinéma que du mariage, où les intérieurs dorés répondent au noir des rues.",
+      "Trente-deux images retenues sur mille huit cents. C'est ma proportion habituelle.",
     ],
     prestations: ["Reportage une journée", "Traitement basse lumière", "Tirages d'art"],
     couverture: {
@@ -269,8 +269,8 @@ export const stories: Story[] = [
     exergue: "Vingt-deux personnes, une maison de bois face à l'océan, aucun protocole.",
     recit: [
       "Les mariages les plus petits sont souvent les plus exigeants : il n'y a nulle part où se cacher, aucun effet de masse pour sauver une image.",
-      "Nous avons vécu quatre jours avec eux. Les photographies datent surtout des moments où rien ne se passait — le café du matin, la marche vers la plage, la fin de la nuit.",
-      "Le résultat est le plus proche de ce que nous cherchons : un document, tenu, sans complaisance, qu'on peut regarder dans trente ans.",
+      "J'ai vécu quatre jours avec eux. Les photographies datent surtout des moments où rien ne se passait — le café du matin, la marche vers la plage, la fin de la nuit.",
+      "Le résultat est le plus proche de ce que je cherche : un document, tenu, sans complaisance, qu'on peut regarder dans trente ans.",
     ],
     prestations: ["Immersion quatre jours", "Argentique", "Film 6 minutes"],
     couverture: {

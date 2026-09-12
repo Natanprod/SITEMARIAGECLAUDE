@@ -99,7 +99,7 @@ export function ContactForm() {
 
       <label className="mt-12 block">
         <span className="label-micro text-greige">
-          Dites-nous ce que vous voulez garder
+          Dites-moi ce que vous voulez garder
           <span className="text-terre"> *</span>
         </span>
         <textarea

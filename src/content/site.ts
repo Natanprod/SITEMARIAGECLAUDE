@@ -9,7 +9,7 @@ export const maison = {
   nomCourt: "N.",
   discipline: "Photographie & cinéma de mariage",
   signature: "Maison d'image — depuis 2015",
-  baseline: "Nous ne photographions pas un mariage. Nous en écrivons la mémoire.",
+  baseline: "Je ne photographie pas un mariage. J'en écris la mémoire.",
   ville: "Marseille",
   rayon: "France",
   email: "contactnathanmathieu@gmail.com",
@@ -56,7 +56,7 @@ export const reperes = [
   { valeur: "10", suffixe: "ans", legende: "de pratique de l'image" },
   { valeur: "180", suffixe: "+", legende: "mariages accompagnés" },
   { valeur: "14", suffixe: "pays", legende: "traversés pour une célébration" },
-  { valeur: "12", suffixe: "max", legende: "mariages retenus par saison" },
+  { valeur: "6", suffixe: "sem.", legende: "de sélection et d'édition par mariage" },
 ];
 
 /** Maisons, lieux et titres cités en bas de page — la caution discrète. */

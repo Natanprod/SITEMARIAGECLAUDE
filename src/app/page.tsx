@@ -15,7 +15,7 @@ const savoirFaire = [
     index: "01",
     titre: "Photographie",
     texte:
-      "Reportage éditorial, argentique et numérique mêlés. Aucune pose dirigée hors des vingt minutes de portraits. Une sélection sévère : quatre-vingt-quinze pour cent des images sont écartées.",
+      "Reportage éditorial, argentique et numérique mêlés. Aucune pose dirigée hors des vingt minutes de portraits. Une sélection sévère : j'écarte quatre-vingt-quinze pour cent des images.",
   },
   {
     index: "02",
@@ -48,7 +48,7 @@ export default function Accueil() {
           <div className="flex flex-wrap gap-x-10 gap-y-2">
             <span className="label-micro text-paper/60">{maison.discipline}</span>
             <span className="label-micro text-paper/60">{maison.rayon}</span>
-            <span className="label-micro text-paper/60">Douze mariages par an</span>
+            <span className="label-micro text-paper/60">Sur sélection</span>
           </div>
         }
         basDroite={
@@ -107,9 +107,9 @@ export default function Accueil() {
                 soit visible.
               </RevealItem>
               <RevealItem as="p">
-                Je retiens douze célébrations par an. C&apos;est la seule manière
-                d&apos;être présent avant, pendant, et surtout après — là où se
-                joue l&apos;essentiel du travail.
+                Je retiens peu de célébrations par an, et c&apos;est délibéré :
+                c&apos;est la seule manière d&apos;être présent avant, pendant, et
+                surtout après — là où se joue l&apos;essentiel du travail.
               </RevealItem>
             </RevealGroup>
 
@@ -264,8 +264,8 @@ export default function Accueil() {
           src: "/plates/contact-colonne.jpg",
           alt: "Lumière de fin de jour sur un mur clair",
         }}
-        titre="Dites-nous la date, le lieu, et ce que vous voulez garder"
-        hautGauche={<span className="label-micro text-paper/60">Nous écrire</span>}
+        titre="Dites-moi la date, le lieu, et ce que vous voulez garder"
+        hautGauche={<span className="label-micro text-paper/60">M&apos;écrire</span>}
         basGauche={
           <span className="label link-draw text-[0.6875rem]">
             Prendre contact

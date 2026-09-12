@@ -10,7 +10,7 @@ import { maison, reperes, temoignages } from "@/content/site";
 export const metadata: Metadata = {
   title: "La Maison",
   description:
-    "Dix ans d'image — publicité, mode, portrait — portés dans le mariage. Direction artistique, argentique, film. Douze célébrations par an.",
+    "Dix ans d'image — publicité, mode, portrait — portés dans le mariage. Direction artistique, argentique, film. Peu de célébrations par an, choisies.",
 };
 
 const principes = [
@@ -18,7 +18,7 @@ const principes = [
     index: "I",
     titre: "La lumière avant le sujet",
     texte:
-      "Nous repérons chaque lieu à l'heure exacte de la célébration. Un cadre se décide avant que quiconque n'y entre.",
+      "Je repère chaque lieu à l'heure exacte de la célébration. Un cadre se décide avant que quiconque n'y entre.",
   },
   {
     index: "II",
@@ -30,7 +30,7 @@ const principes = [
     index: "III",
     titre: "La sélection",
     texte:
-      "Quatre-vingt-quinze pour cent de ce que nous produisons est écarté. C'est la part la plus longue du travail, et la seule qui fasse une différence visible.",
+      "J'écarte quatre-vingt-quinze pour cent de ce que je produis. C'est la part la plus longue du travail, et la seule qui fasse une différence visible.",
   },
   {
     index: "IV",
@@ -46,7 +46,7 @@ const refus = [
   "Les filtres et les rendus à la mode",
   "Les formules à trois niveaux vendues sans rencontre",
   "Les publications sans votre accord écrit",
-  "Plus de douze mariages par an",
+  "Prendre plus de mariages que je ne peux en éditer",
 ];
 
 export default function Maison() {
@@ -199,8 +199,8 @@ export default function Maison() {
                 Par principe
               </Etiquette>
             </Reveal>
-            <TitreAnime geste="dilate" className="mt-10">
-              Ce que la maison ne fait pas.
+            <TitreAnime geste="volet" className="mt-10">
+              Ce que je ne fais pas.
             </TitreAnime>
             <Reveal delay={0.1}>
               <Chapeau className="mt-10 text-paper/70">

@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     template: `%s — ${maison.nom}`,
   },
   description:
-    "Maison d'image dédiée au mariage : photographie éditoriale et films de célébration, conçus comme des œuvres. Marseille, Provence et toute la France. Douze mariages par an.",
+    "Maison d'image dédiée au mariage : photographie éditoriale et films de célébration, conçus comme des œuvres. Marseille, Provence et toute la France. Peu de mariages par an, choisis.",
   keywords: [
     "photographe de mariage haut de gamme",
     "vidéaste de mariage",

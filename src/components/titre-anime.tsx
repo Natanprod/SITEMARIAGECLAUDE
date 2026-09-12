@@ -2,7 +2,7 @@
 
 import { motion, useReducedMotion } from "framer-motion";
 import { Fragment, type ReactNode } from "react";
-import { EASE_MAISON, EASE_RIDEAU, seuil } from "@/lib/motion";
+import { EASE_RIDEAU, seuil } from "@/lib/motion";
 
 /**
  * Le titre de section, mot à mot.
@@ -15,9 +15,14 @@ import { EASE_MAISON, EASE_RIDEAU, seuil } from "@/lib/motion";
  * dans un <Reveal> : le fondu du parent dissoudrait le cache et le geste
  * perdrait sa netteté. Il porte donc son propre déclencheur.
  *
- * `geste="dilate"` substitue au découpage la fermeture de l'interlettrage,
- * de 0,14 em à −0,03 : c'est le geste des plans, et il tient sur un fond
- * sombre là où le cache mot à mot suppose un fond franc.
+ * `geste="volet"` substitue au découpage un volet horizontal : c'est le
+ * geste des plans, et il tient sur un fond sombre là où le cache mot à mot
+ * suppose un fond franc.
+ *
+ * Ce geste animait d'abord l'interlettrage. Mauvaise idée : la largeur
+ * mesurée du texte change à chaque image, donc l'endroit où il se coupe,
+ * et le titre saute d'une ligne à l'autre en pleine animation. Un volet
+ * ne touche pas à la mise en page.
  */
 export function TitreAnime({
   children,
@@ -26,7 +31,7 @@ export function TitreAnime({
 }: {
   children: ReactNode;
   className?: string;
-  geste?: "mots" | "dilate";
+  geste?: "mots" | "volet";
 }) {
   const reduit = useReducedMotion();
   const base = `text-[length:var(--text-h2)] leading-[1.04] ${className}`;
@@ -38,14 +43,14 @@ export function TitreAnime({
     return <h2 className={base}>{children}</h2>;
   }
 
-  if (geste === "dilate") {
+  if (geste === "volet") {
     return (
       <motion.h2
         className={base}
-        initial={{ letterSpacing: "0.14em" }}
-        whileInView={{ letterSpacing: "-0.02em" }}
+        initial={{ clipPath: "inset(0 100% 0 0)" }}
+        whileInView={{ clipPath: "inset(0 0% 0 0)" }}
         viewport={seuil}
-        transition={{ duration: 1.6, ease: EASE_MAISON }}
+        transition={{ duration: 1.25, ease: EASE_RIDEAU }}
       >
         {texte}
       </motion.h2>

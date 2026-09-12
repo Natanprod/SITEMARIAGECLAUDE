@@ -34,7 +34,7 @@ export default function Histoires() {
         basGauche={
           <p className="max-w-lg text-paper/75">
             Chaque mariage impose sa contrainte : une lumière, un lieu, un
-            nombre. Ces six-là ont été retenus pour ce qu&apos;ils ont demandé.
+            nombre. J&apos;ai retenu ces six-là pour ce qu&apos;ils ont demandé.
           </p>
         }
         basDroite={
@@ -73,13 +73,13 @@ export default function Histoires() {
             Ce qui n&apos;est pas montré
           </Etiquette>
         </Reveal>
-        <TitreAnime geste="dilate" className="mt-10">
-          Une part importante de notre travail n&apos;est jamais publiée.
+        <TitreAnime geste="volet" className="mt-10">
+          Une part importante de mon travail n&apos;est jamais publiée.
         </TitreAnime>
         <Reveal delay={0.1}>
           <p className="mx-auto mt-10 max-w-xl text-paper/70">
-            Aucun mariage n&apos;est publié sans accord écrit. Cela convient
-            parfaitement à la maison.
+            Aucun mariage n&apos;est publié sans accord écrit. Cela me convient
+            parfaitement.
           </p>
         </Reveal>
       </Respiration>

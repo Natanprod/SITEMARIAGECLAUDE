@@ -94,9 +94,10 @@ export default function Contact() {
               <Filet className="mt-12 text-ink" />
 
               <p className="mt-10 text-ardoise">
-                Les dates de mai à septembre se retiennent le plus souvent douze
-                à dix-huit mois à l&apos;avance. Douze célébrations par an, pas
-                davantage.
+                Les dates de mai à septembre se réservent le plus souvent
+                douze à dix-huit mois à l&apos;avance. Je retiens peu de
+                célébrations, pour donner à chacune le temps qu&apos;elle
+                demande.
               </p>
             </Reveal>
           </div>
