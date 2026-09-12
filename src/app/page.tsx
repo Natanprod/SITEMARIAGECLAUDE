@@ -3,7 +3,8 @@ import { Masthead } from "@/components/masthead";
 import { Plate } from "@/components/plate";
 import { StoryCard } from "@/components/story-card";
 import { Reveal, RevealGroup, RevealItem } from "@/components/reveal";
-import { Chapeau, Etiquette, Filet, TitreSection } from "@/components/editorial";
+import { Chapeau, Etiquette, Filet } from "@/components/editorial";
+import { TitreAnime } from "@/components/titre-anime";
 import { maison, reperes, temoignages } from "@/content/site";
 import { stories } from "@/content/stories";
 
@@ -61,12 +62,10 @@ export default function Accueil() {
               </Etiquette>
             </Reveal>
 
-            <Reveal delay={0.08}>
-              <TitreSection className="mt-10 max-w-2xl">
-                La plupart des mariages sont photographiés. Très peu sont
-                regardés.
-              </TitreSection>
-            </Reveal>
+            <TitreAnime className="mt-10 max-w-2xl">
+              La plupart des mariages sont photographiés. Très peu sont
+              regardés.
+            </TitreAnime>
 
             <RevealGroup className="mt-12 max-w-xl space-y-6 text-ardoise">
               <RevealItem as="p">
@@ -137,14 +136,16 @@ export default function Accueil() {
       <section className="bg-albatre py-[var(--spacing-section)]">
         <div className="frame">
           <div className="flex flex-wrap items-end justify-between gap-8">
-            <Reveal>
-              <Etiquette index="02" accent="terre" className="text-greige">
-                Histoires
-              </Etiquette>
-              <TitreSection className="mt-10 max-w-xl">
+            <div>
+              <Reveal>
+                <Etiquette index="02" accent="terre" className="text-greige">
+                  Histoires
+                </Etiquette>
+              </Reveal>
+              <TitreAnime className="mt-10 max-w-xl">
                 Six célébrations, choisies pour ce qu&apos;elles ont exigé.
-              </TitreSection>
-            </Reveal>
+              </TitreAnime>
+            </div>
             <Reveal delay={0.1}>
               <Link href="/histoires" className="label link-draw">
                 Toutes les histoires
@@ -191,10 +192,10 @@ export default function Accueil() {
                 <Etiquette index="03" accent="lilas" className="text-paper/60">
                   Le cinéma
                 </Etiquette>
-                <TitreSection className="mt-10">
-                  Un film, pas une vidéo de mariage.
-                </TitreSection>
               </Reveal>
+              <TitreAnime className="mt-10">
+                Un film, pas une vidéo de mariage.
+              </TitreAnime>
               <Reveal delay={0.08}>
                 <p className="mt-10 text-paper/70">
                   Nous tournons comme on tourne une fiction courte : repérages,
@@ -277,10 +278,10 @@ export default function Accueil() {
               <Etiquette index="05" accent="sauge" className="text-greige">
                 Nous écrire
               </Etiquette>
-              <TitreSection className="mt-10">
-                Dites-nous la date, le lieu, et ce que vous voulez garder.
-              </TitreSection>
             </Reveal>
+            <TitreAnime className="mt-10">
+              Dites-nous la date, le lieu, et ce que vous voulez garder.
+            </TitreAnime>
             <Reveal delay={0.08}>
               <Chapeau className="mt-10 max-w-lg text-ardoise">
                 Nous répondons à chaque lettre sous quarante-huit heures, par

@@ -3,7 +3,8 @@ import Link from "next/link";
 import { Masthead } from "@/components/masthead";
 import { Plate } from "@/components/plate";
 import { Reveal, RevealGroup, RevealItem } from "@/components/reveal";
-import { Chapeau, Etiquette, Filet, TitreSection } from "@/components/editorial";
+import { Chapeau, Etiquette, Filet } from "@/components/editorial";
+import { TitreAnime } from "@/components/titre-anime";
 import { maison, reperes, temoignages } from "@/content/site";
 
 export const metadata: Metadata = {
@@ -80,10 +81,10 @@ export default function Maison() {
           <div className="lg:col-span-6 lg:col-start-7">
             <Reveal>
               <Etiquette accent="sauge" className="text-greige">Le parcours</Etiquette>
-              <TitreSection className="mt-10">
-                Je suis venu au mariage par le film, pas l&apos;inverse.
-              </TitreSection>
             </Reveal>
+            <TitreAnime className="mt-10">
+              Je suis venu au mariage par le film, pas l&apos;inverse.
+            </TitreAnime>
 
             <RevealGroup className="mt-12 space-y-6 text-ardoise">
               <RevealItem as="p">
@@ -151,10 +152,10 @@ export default function Maison() {
           <div className="lg:col-span-4">
             <Reveal>
               <Etiquette accent="sauge" className="text-greige">Quatre principes</Etiquette>
-              <TitreSection className="mt-10">
-                Une méthode, tenue depuis le premier jour.
-              </TitreSection>
             </Reveal>
+            <TitreAnime className="mt-10">
+              Une méthode, tenue depuis le premier jour.
+            </TitreAnime>
           </div>
 
           <RevealGroup className="lg:col-span-7 lg:col-start-6" pas={0.09}>
@@ -183,9 +184,11 @@ export default function Maison() {
           <div className="lg:col-span-5">
             <Reveal>
               <Etiquette accent="terre" className="text-paper/60">Par principe</Etiquette>
-              <TitreSection className="mt-10">
-                Ce que la maison ne fait pas.
-              </TitreSection>
+            </Reveal>
+            <TitreAnime className="mt-10">
+              Ce que la maison ne fait pas.
+            </TitreAnime>
+            <Reveal delay={0.08}>
               <Chapeau className="mt-10 text-paper/70">
                 Une maison se définit autant par ses refus que par son
                 catalogue.

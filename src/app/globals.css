@@ -231,10 +231,87 @@
   --grain-texture: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.86' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='0.44'/%3E%3C/svg%3E");
 }
 
+
+/* ==========================================================================
+   Le lever de rideau
+   Voile posé sur la première page ouverte dans la session. Entièrement
+   piloté par CSS : il se lève même sans JavaScript, et disparaît sans
+   qu'aucun script ne s'exécute si le visiteur demande moins de mouvement.
+   ========================================================================== */
+
+.ouverture {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  background-color: var(--color-ink);
+  will-change: transform;
+  animation: ouverture-lever 950ms var(--ease-rideau) 1500ms forwards;
+}
+
+.ouverture-nom {
+  font-family: var(--font-display);
+  font-size: clamp(1.125rem, 0.9rem + 1.1vw, 1.75rem);
+  letter-spacing: 0.01em;
+  color: var(--color-paper);
+  animation: ouverture-nom 700ms var(--ease-maison) both;
+}
+
+.ouverture-fil {
+  display: block;
+  width: clamp(7rem, 18vw, 12rem);
+  height: 1px;
+  background-color: color-mix(in srgb, var(--color-paper) 22%, transparent);
+}
+
+.ouverture-fil > i {
+  display: block;
+  height: 100%;
+  width: 0;
+  background-color: var(--color-terre);
+  animation: ouverture-fil 950ms var(--ease-maison) 380ms forwards;
+}
+
+@keyframes ouverture-lever {
+  to {
+    transform: translateY(-100%);
+    visibility: hidden;
+  }
+}
+
+@keyframes ouverture-nom {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes ouverture-fil {
+  to {
+    width: 100%;
+  }
+}
+
+/* Déjà vu dans cette session : le rideau n'existe pas. */
+html[data-ouverture="vue"] .ouverture {
+  display: none;
+}
+
 /* Le mouvement est un parti pris, pas une obligation */
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+
+  .ouverture {
+    display: none;
   }
 
   *,

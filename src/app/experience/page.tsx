@@ -3,7 +3,8 @@ import Link from "next/link";
 import { Masthead } from "@/components/masthead";
 import { Plate } from "@/components/plate";
 import { Reveal, RevealGroup, RevealItem } from "@/components/reveal";
-import { Chapeau, Etiquette, Filet, TitreSection } from "@/components/editorial";
+import { Chapeau, Etiquette, Filet } from "@/components/editorial";
+import { TitreAnime } from "@/components/titre-anime";
 import { collections, deroule, questions } from "@/content/collections";
 
 export const metadata: Metadata = {
@@ -96,10 +97,10 @@ export default function Experience() {
         <div className="frame relative z-2">
           <Reveal>
             <Etiquette accent="tournesol" className="text-paper/60">Le déroulé</Etiquette>
-            <TitreSection className="mt-10 max-w-2xl">
-              De la première lettre à l&apos;objet posé sur votre table.
-            </TitreSection>
           </Reveal>
+          <TitreAnime className="mt-10 max-w-2xl">
+            De la première lettre à l&apos;objet posé sur votre table.
+          </TitreAnime>
 
           <Filet className="mt-16 text-paper" />
 
@@ -150,10 +151,10 @@ export default function Experience() {
           <div className="lg:col-span-4">
             <Reveal>
               <Etiquette accent="tournesol" className="text-greige">Questions</Etiquette>
-              <TitreSection className="mt-10">
-                Les six que l&apos;on nous pose toujours.
-              </TitreSection>
             </Reveal>
+            <TitreAnime className="mt-10">
+              Les six que l&apos;on nous pose toujours.
+            </TitreAnime>
           </div>
 
           <div className="lg:col-span-7 lg:col-start-6">

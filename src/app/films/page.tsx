@@ -3,7 +3,8 @@ import Link from "next/link";
 import { Masthead } from "@/components/masthead";
 import { FilmFrame } from "@/components/film-frame";
 import { Reveal, RevealGroup, RevealItem } from "@/components/reveal";
-import { Chapeau, Etiquette, Filet, TitreSection } from "@/components/editorial";
+import { Chapeau, Etiquette, Filet } from "@/components/editorial";
+import { TitreAnime } from "@/components/titre-anime";
 import { films, procedeFilm } from "@/content/films";
 
 export const metadata: Metadata = {
@@ -75,10 +76,10 @@ export default function Films() {
         <div className="frame relative z-2">
           <Reveal>
             <Etiquette accent="lilas" className="text-paper/60">Le procédé</Etiquette>
-            <TitreSection className="mt-10 max-w-2xl">
-              Quatre mouvements, du repérage à l&apos;objet livré.
-            </TitreSection>
           </Reveal>
+          <TitreAnime className="mt-10 max-w-2xl">
+            Quatre mouvements, du repérage à l&apos;objet livré.
+          </TitreAnime>
 
           <Filet className="mt-16 text-paper" />
 

@@ -180,6 +180,33 @@ Les variantes sont centralisées dans `src/lib/motion.ts`. Règle unique :
 rien ne rebondit, rien ne dépasse, tout est lent (0,9 à 1,6 s, courbes
 `cubic-bezier(0.16, 1, 0.3, 1)` et `(0.76, 0, 0.24, 1)`).
 
+Les gestes en place :
+
+| Geste | Où | Fichier |
+| --- | --- | --- |
+| Titre du bandeau monté ligne par ligne, parallaxe de l'image d'ouverture | Toutes les pages | `masthead.tsx` |
+| Rideau d'ouverture des planches, remise à l'échelle de l'image | Chaque image | `plate.tsx` |
+| **Parallaxe interne** — l'image dérive moins vite que son cadre | Chaque image | `plate.tsx` |
+| Montée cadencée des blocs de texte | Partout | `reveal.tsx` |
+| **Titres de section mot à mot** | Huit titres, jamais le texte courant | `titre-anime.tsx` |
+| **Lever de rideau** — le nom, un filet, puis le voile se lève | Première page de la session | `ouverture.tsx` |
+| Menu plein écran en rideau d'encre, trait qui se dessine sous les liens | En-tête, liens | `site-header.tsx`, `globals.css` |
+
+Trois points de vigilance, appris en les corrigeant :
+
+- **Le lever de rideau est piloté par CSS, pas par JavaScript.** Le voile est
+  rendu par le serveur, donc aucun clignotement avant hydratation ; il se lève
+  même si le script ne s'exécute jamais, donc il ne peut pas rester coincé sur
+  le site. Le script en ligne ne sert qu'à mémoriser la session.
+- **Un titre découpé en mots doit garder ses espaces.** Sans un vrai nœud de
+  texte entre deux masques, `textContent` se lit
+  « Cequelamaisonnefaitpas » — pour un lecteur d'écran comme pour un moteur
+  d'indexation. L'écart visuel vient du `gap` ; l'espace, d'un nœud de texte
+  que le flex ne rend pas.
+- **Un titre mot à mot ne se met pas dans un `<Reveal>`.** Le fondu du parent
+  dissout le cache et le geste perd sa netteté : le titre porte son propre
+  déclencheur et sort du bloc.
+
 `prefers-reduced-motion` est respecté partout : les composants ne dégradent
 pas l'animation, **ils la retirent** et affichent le contenu directement.
 

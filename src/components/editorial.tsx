@@ -65,24 +65,6 @@ export function Etiquette({
   );
 }
 
-/**
- * Le titre de section. Employé partout : l'échelle et la graisse ne
- * changent pas d'une page à l'autre, seule la longueur du texte varie.
- */
-export function TitreSection({
-  children,
-  className = "",
-}: {
-  children: ReactNode;
-  className?: string;
-}) {
-  return (
-    <h2 className={`text-[length:var(--text-h2)] leading-[1.04] ${className}`}>
-      {children}
-    </h2>
-  );
-}
-
 /** Paragraphe d'introduction — plus large, plus clair, jamais justifié. */
 export function Chapeau({
   children,
