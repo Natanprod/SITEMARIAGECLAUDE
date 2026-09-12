@@ -46,7 +46,10 @@ export type PlanProps = {
  * L'image touche les quatre bords, le texte s'installe dans les angles.
  * Trois gestes à l'entrée, tous horizontaux ou d'échelle, jamais verticaux :
  * un volet découvre le plan, l'image se resserre de 1,16 à 1, et un second
- * volet découvre le titre de la gauche vers la droite.
+ * volet découvre le titre de la gauche vers la droite. Ce volet déborde
+ * verticalement de 0,3 em : avec un interligne de 0,98, les accents et les
+ * jambages sortent de leur ligne, et un découpage au ras de la boîte les
+ * tranchait — « vidéo » y perdait son accent.
  *
  * Le titre était d'abord animé par l'interlettrage, qui se refermait de
  * 0,14 em à −0,03. C'était un défaut : l'interlettrage change la largeur
@@ -194,9 +197,9 @@ export function Plan({
               reduit
                 ? undefined
                 : {
-                    repos: { clipPath: "inset(0 100% 0 0)" },
+                    repos: { clipPath: "inset(-0.3em 100% -0.3em 0)" },
                     entre: {
-                      clipPath: "inset(0 0% 0 0)",
+                      clipPath: "inset(-0.3em 0% -0.3em 0)",
                       transition: {
                         duration: 1.25,
                         ease: EASE_RIDEAU,

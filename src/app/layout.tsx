@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Alfa_Slab_One, Jost } from "next/font/google";
 import "./globals.css";
 import { Ouverture } from "@/components/ouverture";
+import { TransitionPage } from "@/components/transition-page";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { maison } from "@/content/site";
@@ -75,6 +76,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body className="flex min-h-full flex-col bg-paper">
         <Ouverture />
+        <TransitionPage />
         <SiteHeader />
         <main className="flex-1">{children}</main>
         <SiteFooter />

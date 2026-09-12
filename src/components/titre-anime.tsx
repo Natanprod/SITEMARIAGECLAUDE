@@ -19,6 +19,10 @@ import { EASE_RIDEAU, seuil } from "@/lib/motion";
  * geste des plans, et il tient sur un fond sombre là où le cache mot à mot
  * suppose un fond franc.
  *
+ * Le volet déborde verticalement de 0,3 em : au ras de la boîte, il
+ * tranchait accents et jambages, que l'interligne serré fait sortir de
+ * leur ligne.
+ *
  * Ce geste animait d'abord l'interlettrage. Mauvaise idée : la largeur
  * mesurée du texte change à chaque image, donc l'endroit où il se coupe,
  * et le titre saute d'une ligne à l'autre en pleine animation. Un volet
@@ -47,8 +51,8 @@ export function TitreAnime({
     return (
       <motion.h2
         className={base}
-        initial={{ clipPath: "inset(0 100% 0 0)" }}
-        whileInView={{ clipPath: "inset(0 0% 0 0)" }}
+        initial={{ clipPath: "inset(-0.3em 100% -0.3em 0)" }}
+        whileInView={{ clipPath: "inset(-0.3em 0% -0.3em 0)" }}
         viewport={seuil}
         transition={{ duration: 1.25, ease: EASE_RIDEAU }}
       >
