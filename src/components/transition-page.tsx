@@ -35,7 +35,7 @@ import { EASE_MAISON, EASE_RIDEAU } from "@/lib/motion";
  * centrées ou verticales, et trois d'entre elles laissent la page faire
  * l'essentiel du travail.
  */
-const VARIANTE: "souffle" | "papier" | "levee" | "diaphragme" = "souffle";
+const VARIANTE: "souffle" | "papier" | "levee" | "diaphragme" = "levee";
 
 /** Chaque écriture : la couleur du voile, et son geste. */
 const ECRITURES = {
