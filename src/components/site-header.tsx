@@ -53,7 +53,7 @@ export function SiteHeader() {
           "text-paper",
           defile && !menu
             ? "bg-noir/82 backdrop-blur-[3px]"
-            : "bg-transparent",
+            : "bandeau-voile",
         ].join(" ")}
       >
         <div className="frame flex items-center justify-between py-5 md:py-6">

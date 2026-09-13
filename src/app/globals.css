@@ -237,6 +237,27 @@
 
 /* Voile de lisibilité. Jamais un aplat : une descente depuis le bas,
    pour que le haut de l'image reste intact. */
+/**
+ * Le voile de l'en-tête.
+ *
+ * En plein cadre, l'en-tête flotte sur l'image. Tant que les planches
+ * étaient des dégradés sombres, le texte tenait seul ; avec de vraies
+ * photographies, un ciel clair ou un feuillage en contre-jour le fait
+ * disparaître — mesuré à 1,00:1 sous le logotype, soit strictement
+ * invisible.
+ *
+ * Ce dégradé très court rend le haut du cadre au texte sans poser de
+ * barre : il s'éteint avant le premier tiers, et l'image reprend la main.
+ */
+@utility bandeau-voile {
+  background: linear-gradient(
+    to bottom,
+    rgb(10 10 9 / 0.72) 0%,
+    rgb(10 10 9 / 0.42) 45%,
+    rgb(10 10 9 / 0) 100%
+  );
+}
+
 @utility voile {
   position: absolute;
   inset: 0;
