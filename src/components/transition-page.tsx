@@ -15,21 +15,40 @@ import { EASE_MAISON, EASE_RIDEAU } from "@/lib/motion";
  *
  * Deux écueils rencontrés en chemin, et évités ici.
  *
- * `template.tsx` semblait l'endroit naturel, puisqu'il est remonté à chaque
+ * `template.tsx` semblait l'endroit prévu, puisqu'il est remonté à chaque
  * navigation. Mais sous export statique, l'arbre qu'il enveloppait ne se
- * réhydratait pas : React jetait l'hydratation de chaque page et la rendait
- * entièrement côté client. Le voile logé dans la mise en page n'a pas ce
+ * réhydratait pas : React jetait le HTML du serveur sur les sept pages et
+ * rendait tout côté client. Le voile logé dans la mise en page n'a pas ce
  * défaut — il n'enveloppe rien, c'est un frère du contenu.
  *
- * Et rien ne se décide pendant le rendu. Une première version lisait un
- * drapeau de module, qui passait à faux dès la première page construite :
- * les suivantes étaient écrites avec le voile dans leur HTML, que le
- * navigateur ne reproduisait pas. Ici le rendu est immuable — un div
- * transparent et inerte — et tout se joue dans un effet.
+ * Et rien ne se décide pendant le rendu : une première version lisait un
+ * drapeau de module, qui passait à faux dès la première page construite.
+ * Le rendu est immuable — un div transparent et inerte — et tout se joue
+ * dans un effet.
  */
 
-/** Le geste retenu. Trois écritures possibles, une seule active. */
-const VARIANTE: "volet" | "fondu" | "glissement" = "volet";
+/**
+ * Le geste retenu.
+ *
+ * Un balayage horizontal traverse le regard : on le remarque plus que la
+ * page. Les quatre écritures ci-dessous s'en gardent — elles sont brèves,
+ * centrées ou verticales, et trois d'entre elles laissent la page faire
+ * l'essentiel du travail.
+ */
+const VARIANTE: "souffle" | "papier" | "levee" | "diaphragme" = "souffle";
+
+/** Chaque écriture : la couleur du voile, et son geste. */
+const ECRITURES = {
+  /** Le plus discret : un voile d'encre qui s'efface en un souffle,
+   *  pendant que la page se pose depuis un cheveu d'échelle. */
+  souffle: { couleur: "bg-noir", duree: 0.42 },
+  /** Le même, mais à travers le papier : plus clair, plus aérien. */
+  papier: { couleur: "bg-paper", duree: 0.46 },
+  /** Le voile se lève, comme le rideau d'ouverture du site. */
+  levee: { couleur: "bg-noir", duree: 0.72 },
+  /** L'iris du cinéma muet : le noir se referme sur lui-même et disparaît. */
+  diaphragme: { couleur: "bg-noir", duree: 0.78 },
+} as const;
 
 export function TransitionPage() {
   const chemin = usePathname();
@@ -45,31 +64,37 @@ export function TransitionPage() {
     }
     if (reduit || !scope.current) return;
 
-    if (VARIANTE === "volet") {
-      // L'opacité est tenue à 1 pendant tout le geste : au repos le voile
-      // est transparent, sans quoi le volet se jouerait sur de l'invisible.
+    const voile = scope.current;
+    const page = document.querySelector("main");
+    const { duree } = ECRITURES[VARIANTE];
+
+    if (VARIANTE === "levee") {
       animer(
-        scope.current,
-        { opacity: [1, 1], clipPath: ["inset(0 0 0 0%)", "inset(0 0 0 100%)"] },
-        { duration: 0.78, ease: EASE_RIDEAU },
+        voile,
+        { opacity: [1, 1], y: ["0%", "-100%"] },
+        { duration: duree, ease: EASE_RIDEAU },
+      );
+    } else if (VARIANTE === "diaphragme") {
+      animer(
+        voile,
+        {
+          opacity: [1, 1],
+          clipPath: ["circle(140% at 50% 50%)", "circle(0% at 50% 50%)"],
+        },
+        { duration: duree, ease: EASE_RIDEAU },
       );
     } else {
-      animer(
-        scope.current,
-        { opacity: [1, 0] },
-        { duration: 0.62, ease: EASE_MAISON },
-      );
+      animer(voile, { opacity: [1, 0] }, { duration: duree, ease: EASE_MAISON });
     }
 
-    if (VARIANTE === "glissement") {
-      const page = document.querySelector("main");
-      if (page) {
-        animer(
-          page,
-          { opacity: [0, 1], x: ["2.5%", "0%"] },
-          { duration: 0.85, ease: EASE_MAISON, delay: 0.08 },
-        );
-      }
+    // La page se pose depuis un cheveu d'échelle : c'est ce presque-rien
+    // qui fait la différence entre « ça a changé » et « ça s'est posé ».
+    if (page && VARIANTE !== "levee") {
+      animer(
+        page,
+        { opacity: [0.55, 1], scale: [1.012, 1] },
+        { duration: duree + 0.34, ease: EASE_MAISON },
+      );
     }
   }, [chemin, animer, reduit, scope]);
 
@@ -78,7 +103,7 @@ export function TransitionPage() {
       ref={scope}
       data-transition
       aria-hidden
-      className="pointer-events-none fixed inset-0 z-100 bg-noir opacity-0"
+      className={`pointer-events-none fixed inset-0 z-100 opacity-0 ${ECRITURES[VARIANTE].couleur}`}
     />
   );
 }
