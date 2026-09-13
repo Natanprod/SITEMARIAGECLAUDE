@@ -9,7 +9,7 @@ import {
   useTransform,
 } from "framer-motion";
 import { useRef, type ReactNode } from "react";
-import { EASE_MAISON, EASE_RIDEAU, seuilLarge } from "@/lib/motion";
+import { EASE_MAISON, EASE_RIDEAU, gestes, seuilLarge } from "@/lib/motion";
 
 type Hauteur = "plein" | "grand" | "moyen" | "bande";
 
@@ -89,23 +89,21 @@ export function Plan({
     <motion.div
       ref={cadre}
       className={`plan group ${HAUTEURS[hauteur]} ${className}`}
-      initial={reduit ? undefined : "repos"}
-      whileInView={reduit ? undefined : "entre"}
+      initial="repos"
+      whileInView="entre"
       viewport={seuilLarge}
     >
       {/* Volet : le plan se découvre par la gauche */}
       <motion.div
         className="absolute inset-0 z-1"
         variants={
-          reduit
-            ? undefined
-            : {
+          gestes(reduit, {
                 repos: { clipPath: "inset(0 100% 0 0)" },
                 entre: {
                   clipPath: "inset(0 0% 0 0)",
                   transition: { duration: 1.15, ease: EASE_RIDEAU },
                 },
-              }
+              })
         }
       >
         <motion.div
@@ -119,15 +117,13 @@ export function Plan({
           <motion.div
             className="absolute inset-0"
             variants={
-              reduit
-                ? undefined
-                : {
+              gestes(reduit, {
                     repos: { scale: 1.16 },
                     entre: {
                       scale: 1,
                       transition: { duration: 2.1, ease: EASE_MAISON },
                     },
-                  }
+                  })
             }
           >
             <Image
@@ -161,15 +157,13 @@ export function Plan({
         <motion.div
           className="angle top-[calc(var(--spacing-gutter)+3.25rem)] left-[var(--spacing-gutter)]"
           variants={
-            reduit
-              ? undefined
-              : {
+            gestes(reduit, {
                   repos: { opacity: 0 },
                   entre: {
                     opacity: 1,
                     transition: { duration: 1, ease: EASE_MAISON, delay: 0.45 },
                   },
-                }
+                })
           }
         >
           {hautGauche}
@@ -179,24 +173,20 @@ export function Plan({
       <motion.div
         className="angle right-[var(--spacing-gutter)] bottom-[var(--spacing-gutter)] left-[var(--spacing-gutter)] gap-5"
         variants={
-          reduit
-            ? undefined
-            : {
+          gestes(reduit, {
                 repos: { opacity: 0 },
                 entre: {
                   opacity: 1,
                   transition: { duration: 1.1, ease: EASE_MAISON, delay: 0.5 },
                 },
-              }
+              })
         }
       >
         {titre ? (
           <motion.h2
             className="max-w-[16ch] text-[length:var(--text-h1)] leading-[0.98] tracking-[-0.03em]"
             variants={
-              reduit
-                ? undefined
-                : {
+              gestes(reduit, {
                     repos: { clipPath: "inset(-0.3em 100% -0.3em 0)" },
                     entre: {
                       clipPath: "inset(-0.3em 0% -0.3em 0)",
@@ -206,7 +196,7 @@ export function Plan({
                         delay: 0.45,
                       },
                     },
-                  }
+                  })
             }
           >
             {titre}
@@ -219,15 +209,13 @@ export function Plan({
         <motion.div
           className="angle right-[var(--spacing-gutter)] bottom-[var(--spacing-gutter)] items-end text-right"
           variants={
-            reduit
-              ? undefined
-              : {
+            gestes(reduit, {
                   repos: { opacity: 0 },
                   entre: {
                     opacity: 1,
                     transition: { duration: 1, ease: EASE_MAISON, delay: 0.65 },
                   },
-                }
+                })
           }
         >
           {basDroite}

@@ -69,3 +69,28 @@ export const motMonte: Variants = {
 /** Seuil commun : l'élément se déclenche quand il est franchement visible. */
 export const seuil = { once: true, amount: 0.25 } as const;
 export const seuilLarge = { once: true, amount: 0.12 } as const;
+
+/**
+ * Le geste, ou son absence.
+ *
+ * `useReducedMotion()` vaut `false` le temps du rendu serveur et du premier
+ * rendu client : l'état de repos part donc dans le HTML — un plan fermé,
+ * un titre masqué. Retirer les variantes ensuite ne nettoie pas ce qui est
+ * déjà posé : le plan reste fermé pour toujours, et le site s'affiche noir
+ * chez qui a coché « réduire les animations ».
+ *
+ * On garde donc toujours les variantes, et c'est la durée qu'on annule.
+ * Le contenu arrive à sa place, sans mouvement — ce qui est exactement ce
+ * que demande le réglage.
+ */
+export function gestes(reduit: boolean | null, variantes: Variants): Variants {
+  if (!reduit) return variantes;
+  return Object.fromEntries(
+    Object.entries(variantes).map(([nom, etat]) => [
+      nom,
+      etat && typeof etat === "object" && "transition" in etat
+        ? { ...etat, transition: { duration: 0 } }
+        : etat,
+    ]),
+  ) as Variants;
+}

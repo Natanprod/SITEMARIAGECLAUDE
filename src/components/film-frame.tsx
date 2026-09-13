@@ -4,7 +4,7 @@ import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 import { useState } from "react";
 import type { Film } from "@/content/films";
-import { EASE_MAISON, EASE_RIDEAU, seuilLarge } from "@/lib/motion";
+import { EASE_MAISON, EASE_RIDEAU, gestes, seuilLarge } from "@/lib/motion";
 
 /**
  * Le plan de film.
@@ -45,36 +45,32 @@ export function FilmFrame({
   return (
     <motion.section
       className="plan group h-[80svh] min-h-[26rem] text-paper"
-      initial={reduit ? undefined : "repos"}
-      whileInView={reduit ? undefined : "entre"}
+      initial="repos"
+      whileInView="entre"
       viewport={seuilLarge}
     >
       <motion.div
         className="absolute inset-0 z-1"
         variants={
-          reduit
-            ? undefined
-            : {
+          gestes(reduit, {
                 repos: { clipPath: "inset(0 100% 0 0)" },
                 entre: {
                   clipPath: "inset(0 0% 0 0)",
                   transition: { duration: 1.15, ease: EASE_RIDEAU },
                 },
-              }
+              })
         }
       >
         <motion.div
           className="absolute inset-0"
           variants={
-            reduit
-              ? undefined
-              : {
+            gestes(reduit, {
                   repos: { scale: 1.16 },
                   entre: {
                     scale: 1,
                     transition: { duration: 2.1, ease: EASE_MAISON },
                   },
-                }
+                })
           }
         >
           <Image
