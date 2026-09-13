@@ -1,0 +1,96 @@
+SITE NATAN — version navigable
+==============================
+
+Ce dossier est le site entier, en fichiers statiques. Aucun serveur Node,
+aucune base de données.
+
+/!\ NE TÉLÉVERSEZ PAS CE FICHIER-CI sur le serveur : il serait lisible
+    par tout le monde à l'adresse de votre site. Il est là pour vous.
+
+
+MISE EN LIGNE CHEZ HOSTINGER
+----------------------------
+
+1. VIDER public_html
+
+  Oui, il faut le vider, et pour une raison précise : le serveur sert
+  index.php AVANT index.html. Si l'ancien index.php de Hostinger reste en
+  place, vous téléversez tout le site et vous continuez à voir la vieille
+  page « site en construction ».
+
+  À SUPPRIMER
+    index.php, default.php, index.html
+    tout fichier ou dossier wp-* (une installation WordPress automatique)
+    les images et dossiers de démonstration de Hostinger
+
+  À GARDER — NE PAS TOUCHER
+    .well-known/     ← la validation du certificat SSL vit là.
+                       Le supprimer casse le HTTPS.
+    cgi-bin/         ← inoffensif, laissez-le.
+
+  Au moindre doute sur un fichier, téléchargez-le avant de le supprimer.
+  Le gestionnaire de fichiers n'a pas de corbeille.
+
+2. TÉLÉVERSER
+
+  Téléversez TOUT LE CONTENU de ce dossier, pas le dossier lui-même :
+  index.html, .htaccess, _next, plates, maison, histoires, films,
+  experience, contact, mentions-legales, 404.html…
+
+  Le plus simple : dans le gestionnaire de fichiers, entrez dans
+  public_html, bouton « Téléverser », déposez le fichier ZIP d'origine.
+  Hostinger propose de le décompresser sur place : acceptez. Puis
+  supprimez le ZIP, et ce fichier-ci.
+
+  ATTENTION AUX FICHIERS CACHÉS : le .htaccess commence par un point et
+  reste invisible par défaut. Dans le gestionnaire de fichiers, activez
+  « Afficher les fichiers cachés » pour vérifier qu'il est bien arrivé.
+  Sans lui, la page 404 et le cache ne fonctionnent pas.
+
+3. LE CERTIFICAT SSL
+
+  Chez Hostinger, le SSL gratuit s'installe TOUT SEUL quand le domaine
+  est rattaché à l'hébergement. Vérifiez d'abord : si le cadenas est
+  déjà dans la barre d'adresse, il n'y a rien à faire.
+
+  Sinon, dans hPanel :
+    Sites web → Tableau de bord (en face du domaine)
+    → Sécurité → SSL → Installer SSL
+  Le statut passe par « Installation » puis « Actif » en quelques minutes.
+
+  Puis, pour que http:// bascule vers https:// :
+    même écran Sécurité → SSL
+    → bouton à trois points en face du domaine → Forcer HTTPS
+
+  N'ACTIVEZ PAS le bloc HTTPS du fichier .htaccess : l'interrupteur de
+  hPanel suffit, et deux règles concurrentes provoquent une boucle de
+  redirection.
+
+  SI LE CERTIFICAT REFUSE DE S'INSTALLER, c'est presque toujours que le
+  domaine ne pointe pas encore vers Hostinger. La validation exige que
+  le domaine réponde déjà chez eux. Laissez la propagation DNS se faire
+  (jusqu'à 24 h) et réessayez.
+
+
+LE REGARDER SUR VOTRE ORDINATEUR
+--------------------------------
+
+  Un double-clic sur index.html NE MARCHE PAS : le navigateur bloque les
+  fichiers voisins. Il faut un petit serveur.
+
+  Mac — Terminal, tapez « cd » puis un espace, glissez ce dossier dans la
+  fenêtre, Entrée, puis :      python3 -m http.server 8000
+
+  Windows — ouvrez ce dossier, tapez « cmd » dans la barre d'adresse,
+  Entrée, puis :               python -m http.server 8000
+
+  Puis http://localhost:8000 dans le navigateur. Ctrl + C pour arrêter.
+
+
+CE QUE VOUS VERREZ
+------------------
+
+  Les photographies sont encore des planches fabriquées : des champs
+  colorés aux bons formats, pour juger les cadrages et le rythme.
+  Le nom, les coordonnées et les mentions légales sont les vrais.
+  Le domaine inscrit dans les métadonnées est encore un espace réservé.

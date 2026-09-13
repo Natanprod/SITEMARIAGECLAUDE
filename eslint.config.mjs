@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Outillage fourni par les skills : hors du périmètre du site.
+    ".claude/**",
   ]),
 ]);
 
